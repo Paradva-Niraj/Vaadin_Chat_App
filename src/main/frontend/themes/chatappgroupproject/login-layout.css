@@ -1,0 +1,189 @@
+/* Styling for the login form */
+.login-view {
+    flex: 1; /* Allow the form to adjust flexibly */
+    display: flex;
+    flex-direction: column; /* Ensure vertical alignment inside the form */
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3); /* Transparent background */
+    border-radius: 12px;
+    backdrop-filter: blur(10px); /* Glass effect */
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+h1 {
+    color: #f1f1f1; /* Light text for heading */
+    font-size: 2.5rem;
+}
+
+/* Glassmorphism Effect for the Login Form */
+.login-form {
+    background-color: transparent;
+    border-radius: 12px;
+    backdrop-filter: blur(10px); /* Blur effect */
+    padding: 30px;
+    width: 100%;
+    max-width: 470px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for separation */
+}
+
+/* Styling for Login Form Fields */
+.login-form .vaadin-login-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+vaadin-login-form-wrapper::part(form-title){
+    color: white;
+}
+
+/* Focused input fields */
+.login-form .vaadin-login-form-wrapper vaadin-text-field input:focus,
+.login-form .vaadin-login-form-wrapper vaadin-password-field input:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: #ffffff;
+}
+
+/* Button Styling */
+.login-form vaadin-button {
+    background-color: #4caf50; /* Green button */
+    color: white;
+    border-radius: 8px;
+    height: 45px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.login-form vaadin-button:hover {
+    background-color: #45a049;
+}
+
+/* Styling for the information text (e.g., Username/Password hints) */
+span {
+    font-size: 0.9rem;
+    color: #bbb; /* Light gray text */
+}
+
+.login-view .login-info {
+    color: #ffffff;
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+/* Center the login elements */
+.login-view > * {
+    z-index: 1;
+    color: white !important;
+}
+
+vaadin-login-form-wrapper {
+    background: rgba(255, 255, 255, 0.0000001); /* Slight transparency for glassmorphism */
+    padding: 30px;
+    width: 100%;
+    max-width: 470px;
+    display: flex;
+    justify-content: center;
+    color: white !important;
+    align-items: center;
+    flex-direction: column;
+}
+vaadin-login-form-wrapper{
+    color: white !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/* Username & Password field styles */
+vaadin-text-field,
+vaadin-password-field {
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Background with reduced opacity */
+    border-radius: 8px;
+    padding: 12px;
+    color: #fff; /* Text color */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Label styling for text fields */
+vaadin-text-field label,
+vaadin-password-field label {
+    color: #ccc; /* Light color for labels */
+}
+
+/* Password visibility button styling */
+vaadin-password-field-button {
+    color: #fff;
+    background: transparent;
+    border: none;
+}
+
+/* Button Styling for "Log in" */
+vaadin-button[slot="submit"] {
+    background-color: #4caf50; /* Green color */
+    color: white;
+    border-radius: 8px;
+    height: 45px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Hover effect for submit button */
+vaadin-button[slot="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Button Styling for "Forgot Password" */
+vaadin-button[slot="forgot-password"] {
+    background-color: transparent;
+    color: #bbb; /* Light gray for this button */
+    border: none;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Hover effect for forgot password button */
+vaadin-button[slot="forgot-password"]:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+
+
+/* Container for login form and image */
+.container-class-login-image {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    display: flex; /* Horizontal alignment */
+    border-radius: 30px;
+    overflow: hidden;
+    justify-content: center; /* Center content */
+    align-items: center; /* Vertically align items */
+    width: fit-content; /* Ensure full width of container */
+    border: 1px solid white;
+}
+
+
+
+/* Styling for the image */
+.login-image {
+  background-image: url("login.svg");
+  background-size: cover; /* Ensures the image covers the entire viewport */
+  background-position: center; /* Centers the image */
+  color: #e0e0e0;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+

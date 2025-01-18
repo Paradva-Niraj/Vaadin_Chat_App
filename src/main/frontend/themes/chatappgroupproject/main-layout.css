@@ -1,0 +1,143 @@
+vaadin-scroller[slot="drawer"] {
+  padding: var(--lumo-space-s);
+  background-color: rgba(36, 36, 36, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+vaadin-app-layout::part(drawer){
+  background-color: transparent;
+}
+
+[slot="drawer"]:is(header, footer) {
+  display: flex;
+  align-items: center;
+  gap: var(--lumo-space-s);
+  padding: var(--lumo-space-s) var(--lumo-space-m);
+  min-height: var(--lumo-size-xl);
+  box-sizing: border-box;
+}
+
+[slot="drawer"]:is(header, footer):is(:empty) {
+  display: none;
+  background-color: transparent;
+}
+
+
+
+vaadin-app-layout::part(navbar) {
+  overflow: hidden;
+  background: rgba(36, 36, 36, 0.6); /* Overlay for darkened backdrop */
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  color: #fff;
+  padding: var(--lumo-space-s);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Softer shadow */
+}
+
+
+vaadin-scroller[slot="drawer"]::-webkit-scrollbar {
+  width: 8px;
+}
+
+vaadin-scroller[slot="drawer"]::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 4px;
+}
+
+vaadin-scroller[slot="drawer"]::-webkit-scrollbar-thumb:hover {
+  background-color: #666;
+}
+
+
+/* H1 Title Styling */
+h1 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  margin: 0;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+
+
+[slot="drawer"]:is(header, footer) {
+  display: flex;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--lumo-space-s);
+  padding: var(--lumo-space-s) var(--lumo-space-m);
+  background-color: #1f1f1f;
+  border-bottom: 1px solid #333;
+}
+
+[slot="drawer"]:is(header, footer):is(:empty) {
+  display: none;
+}
+
+/* Side Navigation Styling */
+/* Side Nav Styling */
+vaadin-side-nav {
+  background-color: #1e1e1eae;
+  color: #e0e0e0;
+  width: 100%;
+  border-radius: 8px;
+  padding: var(--lumo-space-s);
+}
+
+/* Hover for icons inside side nav items */
+vaadin-side-nav-item vaadin-icon:hover {
+  color: #ffffff;
+}
+
+/* Hover effect for side nav items */
+vaadin-side-nav-item:hover {
+  background-color: #333; /* Adding background color on hover */
+  color: #ffffff;
+}
+
+/* Ensure icon color changes with the side nav item hover */
+vaadin-side-nav-item:hover vaadin-icon {
+  color: #ffffff;
+}
+
+/* Drawer Toggle Styling */
+vaadin-drawer-toggle {
+  background-color: transparent;
+  color: #ffffff;
+  border: none;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+vaadin-drawer-toggle:hover {
+  color: #ff6f61;
+}
+
+h3{
+  color:white
+}
+
+.logout-Button{
+  background-color: rgba(255, 0, 0, 0.795);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  color: #fff;
+  width: 100%;
+  margin-top: 5px;
+  padding: 24px;
+}
+
+
+
+.User-Name{
+  color: aqua;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+}

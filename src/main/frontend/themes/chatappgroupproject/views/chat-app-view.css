@@ -1,0 +1,217 @@
+/* Global Dark Theme Styles */
+body {
+  background-color: #12121232;
+  background-image: url("2.jpg");
+  background-size: cover; /* Ensures the image covers the entire viewport */
+  background-position: center; /* Centers the image */
+  background-attachment: fixed; /* Keeps the image fixed while scrolling */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  color: #e0e0e0;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  backdrop-filter: blur(5px); /* Soft backdrop blur */
+}
+
+/* Layout */
+.chat-app-view {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3); /* Overlay for darkened backdrop */
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Soft shadow for a more elegant look */
+  transition: all 0.3s ease-in-out;
+}
+
+.chat-app-view aside {
+  background-color: rgba(36, 36, 36, 0.7); /* Glassmorphism effect */
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(51, 51, 51, 0.5);
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5); /* Soft shadow on the left */
+  backdrop-filter: blur(5px); /* Subtle backdrop blur */
+}
+
+/* Header */
+.chat-app-view aside header {
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.chat-app-view aside header h3 {
+  color: #ffffff;
+  margin: 0;
+}
+
+.chat-app-view aside header vaadin-avatar-group {
+  --vaadin-avatar-group-overlap: 10%;
+}
+
+/* Tabs */
+.chat-app-view aside vaadin-tabs {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-app-view aside vaadin-tabs vaadin-tab {
+  color: #b3b3b3;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin: 0.25rem 1rem;
+  background-color: rgba(51, 51, 51, 0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.chat-app-view aside vaadin-tabs vaadin-tab:hover {
+  background-color: rgba(51, 51, 51, 0.8);
+  color: #ffffff;
+  transform: scale(1.05); /* Slight hover scaling effect */
+}
+
+/* Specific Tab Styles */
+.tab-general {
+  background-color: #3949ab;
+  color: #e8eaf6;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  margin: 0.25rem 1rem;
+}
+
+.tab-support {
+  background-color: #ff7043;
+  color: #fff3e0;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  margin: 0.25rem 1rem;
+}
+
+.tab-casual {
+  background-color: #616161;
+  color: #f5f5f5;
+  font-weight: 400;
+  font-style: italic;
+  border-radius: 0.5rem;
+  margin: 0.25rem 1rem;
+}
+
+/* Chat Container */
+.chat-app-view .chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, rgba(18, 18, 18, 0.9), rgba(30, 30, 30, 0.9));
+  backdrop-filter: blur(8px); /* Glassmorphism effect */
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Soft shadow for depth */
+  overflow-y: auto;
+}
+
+/* Message Input */
+.chat-app-view .chat-container vaadin-message-input {
+  border-top: 1px solid #333;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 1); /* Transparent background with opacity */
+  backdrop-filter: blur(4px); /* Subtle backdrop blur */
+  border-radius: 8px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+vaadin-button{
+  padding: 0.7rem;
+}
+
+vaadin-message-input{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+textarea[slot="textarea"]
+{
+  padding: 0.7rem;
+  background-color: rgba(255, 255, 255, 0.3); /* Transparent background with opacity */
+  color: white;
+}
+
+.chat-app-view .chat-container vaadin-message-input:hover {
+  background-color: rgba(155, 255, 255, 1); /* Darkens on hover */
+  color: white;
+}
+
+/* Scrollbar Styling */
+.chat-app-view .chat-container vaadin-message-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-app-view .chat-container vaadin-message-list::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 10px;
+}
+
+.chat-app-view .chat-container vaadin-message-list::-webkit-scrollbar-thumb:hover {
+  background-color: #666;
+}
+
+
+vaadin-message{
+  color: white;
+}
+
+[part='time'] {
+  color: white;
+  font-size: var(--lumo-font-size-s);
+}
+
+
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 740px) {
+  .chat-app-view {
+    flex-direction: column-reverse;
+  }
+
+  .chat-app-view aside {
+    width: 100%;
+    flex-direction: row;
+    border-right: none;
+    border-top: 1px solid #333;
+  }
+
+  .chat-app-view aside header {
+    display: none;
+  }
+
+  .chat-app-view aside vaadin-tabs {
+    flex: 1;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+    flex-direction: row;
+  }
+
+  .chat-app-view aside vaadin-tabs vaadin-tab {
+    margin: 0 0.25rem;
+  }
+}
