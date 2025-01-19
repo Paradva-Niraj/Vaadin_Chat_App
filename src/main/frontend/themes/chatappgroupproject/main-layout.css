@@ -1,20 +1,22 @@
 vaadin-scroller[slot="drawer"] {
-  padding: var(--lumo-space-s);
-  background-color: rgba(36, 36, 36, 0.6);
-  backdrop-filter: blur(10px);
+  background-color: rgba(36, 36, 36, 0.7);
+  backdrop-filter: blur(12px);
 }
-
-vaadin-app-layout::part(drawer){
+.linkUsernameLogout{
+  padding-bottom: 0px;
+}
+vaadin-app-layout::part(drawer) {
   background-color: transparent;
 }
 
 [slot="drawer"]:is(header, footer) {
   display: flex;
   align-items: center;
-  gap: var(--lumo-space-s);
-  padding: var(--lumo-space-s) var(--lumo-space-m);
+  justify-content: center;
   min-height: var(--lumo-size-xl);
   box-sizing: border-box;
+  background-color: #1f1f1f;
+  border-bottom: 1px solid #333;
 }
 
 [slot="drawer"]:is(header, footer):is(:empty) {
@@ -22,18 +24,14 @@ vaadin-app-layout::part(drawer){
   background-color: transparent;
 }
 
-
-
 vaadin-app-layout::part(navbar) {
   overflow: hidden;
-  background: rgba(36, 36, 36, 0.6); /* Overlay for darkened backdrop */
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
+  background: rgba(36, 36, 36, 0.7); /* Darkened backdrop */
+  backdrop-filter: blur(12px);
   color: #fff;
   padding: var(--lumo-space-s);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Softer shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Softer, more prominent shadow */
 }
-
 
 vaadin-scroller[slot="drawer"]::-webkit-scrollbar {
   width: 8px;
@@ -48,25 +46,18 @@ vaadin-scroller[slot="drawer"]::-webkit-scrollbar-thumb:hover {
   background-color: #666;
 }
 
-
-/* H1 Title Styling */
 h1 {
   color: #ffffff;
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin: 0;
   line-height: 1.5;
   font-weight: bold;
 }
 
-
-
 [slot="drawer"]:is(header, footer) {
   display: flex;
   align-items: center;
-  display: flex;
   justify-content: center;
-  align-items: center;
-  gap: var(--lumo-space-s);
   padding: var(--lumo-space-s) var(--lumo-space-m);
   background-color: #1f1f1f;
   border-bottom: 1px solid #333;
@@ -76,33 +67,26 @@ h1 {
   display: none;
 }
 
-/* Side Navigation Styling */
-/* Side Nav Styling */
 vaadin-side-nav {
   background-color: #1e1e1eae;
   color: #e0e0e0;
   width: 100%;
-  border-radius: 8px;
   padding: var(--lumo-space-s);
 }
 
-/* Hover for icons inside side nav items */
 vaadin-side-nav-item vaadin-icon:hover {
   color: #ffffff;
 }
 
-/* Hover effect for side nav items */
 vaadin-side-nav-item:hover {
-  background-color: #333; /* Adding background color on hover */
+  background-color: #333;
   color: #ffffff;
 }
 
-/* Ensure icon color changes with the side nav item hover */
 vaadin-side-nav-item:hover vaadin-icon {
   color: #ffffff;
 }
 
-/* Drawer Toggle Styling */
 vaadin-drawer-toggle {
   background-color: transparent;
   color: #ffffff;
@@ -115,29 +99,78 @@ vaadin-drawer-toggle:hover {
   color: #ff6f61;
 }
 
-h3{
-  color:white
+h3 {
+  color: white;
 }
 
-.logout-Button{
-  background-color: rgba(255, 0, 0, 0.795);
+.logout-Button {
+  background-color: rgba(255, 0, 0, 0.4);
   border-radius: 12px;
-  backdrop-filter: blur(10px);
+  border: solid 2px red ;
+  backdrop-filter: blur(12px);
   color: #fff;
-  width: 100%;
-  margin-top: 5px;
-  padding: 24px;
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-self: center;
+  padding: 25px 30px;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
+.logout-Button:hover {
+  background-color: rgba(255, 0, 0, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 
+.usernameLogout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-.User-Name{
-  color: aqua;
+.User-Name {
   width: 100%;
+  text-transform: uppercase;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-weight: bold;
-  letter-spacing: 0.2rem;
+  text-transform: uppercase; 
+  font-family: 'Courier New', Courier, monospace;
+}
+.User-Name H3{
+  font-weight: 500;
+font-size: xx-large;
+}
+.User-Name vaadin-icon{
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  display: flex;
+  background-color: rgba(0, 81, 255, 0.4);
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+  justify-content: center;
+  align-items: center; 
+}
+
+
+.Chat-Link-Hz {
+  background-color: rgba(0, 81, 255, 0.2);
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 13px;
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+  color: white;
+}
+
+.Chat-Link-Hz a {
+  color: white;
 }

@@ -1,8 +1,8 @@
 package com.example.application.views;
 
 import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -12,7 +12,7 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
-import com.vaadin.flow.theme.lumo.LumoUtility.Margin.Minus.Horizontal;
+
 
 @Route("login")
 @PageTitle("Login")
@@ -35,11 +35,12 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         add(new Span("Username: admin, Password: password"));
         HorizontalLayout hl=new HorizontalLayout();
         hl.addClassName("container-class-login-image");
-        Image img = new Image();
-        img.setWidth("500px");
-        img.setHeight("500px");
-        img.addClassName("login-image");
-        hl.add(login,img);
+        Div div = new Div(""); // Ensure this path is correct
+        div.setWidth("500px");
+        div.setHeight("500px");
+        div.addClassName("login-image");
+    
+        hl.add(login, div);
         add(hl);
     }
 

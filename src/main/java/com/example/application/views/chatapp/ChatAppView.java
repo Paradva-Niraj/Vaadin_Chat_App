@@ -12,6 +12,8 @@ import com.vaadin.flow.component.html.Aside;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Page;
@@ -32,7 +34,6 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 import com.vaadin.flow.theme.lumo.LumoUtility.Overflow;
 import com.vaadin.flow.theme.lumo.LumoUtility.Padding;
 import com.vaadin.flow.theme.lumo.LumoUtility.Width;
-
 import jakarta.annotation.security.PermitAll;
 
 import java.util.UUID;
@@ -94,8 +95,8 @@ public class ChatAppView extends HorizontalLayout {
     }
 
     private ChatInfo[] chats = new ChatInfo[] {
-            new ChatInfo("general", 0), new ChatInfo("support", 0),
-            new ChatInfo("casual", 0)
+            new ChatInfo("General", 0), new ChatInfo("Support", 0),
+            new ChatInfo("Casual", 0)
     };
     private ChatInfo currentChat = chats[0];
     private Tabs tabs;
@@ -176,13 +177,13 @@ public class ChatAppView extends HorizontalLayout {
 
         // Apply unique styling for each chat tab
         switch (chat.name) {
-            case "general":
+            case "General":
                 tab.addClassName("tab-general");
                 break;
-            case "support":
+            case "Support":
                 tab.addClassName("tab-support");
                 break;
-            case "casual":
+            case "Casual":
                 tab.addClassName("tab-casual");
                 break;
         }
@@ -190,8 +191,7 @@ public class ChatAppView extends HorizontalLayout {
         Span badge = new Span();
         chat.setUnreadBadge(badge);
         badge.getElement().getThemeList().add("badge small contrast");
-        tab.add(new Span(">     " + chat.name), badge);
-
+        tab.add(new Icon(chat.name=="General"?VaadinIcon.MEGAPHONE:chat.name=="Support"?VaadinIcon.TOOLS:chat.name=="Casual"?VaadinIcon.COMMENT_ELLIPSIS:VaadinIcon.COMMENT_ELLIPSIS),new Span(chat.name), badge);
         return tab;
     }
 

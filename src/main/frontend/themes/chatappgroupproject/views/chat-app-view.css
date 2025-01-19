@@ -38,8 +38,6 @@ body {
   display: flex;
   flex-direction: column;
   border-right: 1px solid rgba(51, 51, 51, 0.5);
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
   box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5); /* Soft shadow on the left */
   backdrop-filter: blur(5px); /* Subtle backdrop blur */
 }
@@ -71,14 +69,26 @@ body {
   overflow-y: auto;
   padding: 0.5rem 0;
   display: flex;
+  border-radius: 0px;
   flex-direction: column;
+}
+
+span::part(time){
+  color: white!important;
 }
 
 .chat-app-view aside vaadin-tabs vaadin-tab {
   color: #b3b3b3;
+  text-align: center;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: large;
+  gap: 10px;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
-  margin: 0.25rem 1rem;
+  margin: 0.5rem 1rem;
+  margin-top: 0px;
   background-color: rgba(51, 51, 51, 0.5);
   transition: all 0.3s ease;
   cursor: pointer;
@@ -89,6 +99,7 @@ body {
   color: #ffffff;
   transform: scale(1.05); /* Slight hover scaling effect */
 }
+
 
 /* Specific Tab Styles */
 .tab-general {
@@ -135,12 +146,33 @@ body {
   padding: 1rem;
   background-color: rgba(255, 255, 255, 1); /* Transparent background with opacity */
   backdrop-filter: blur(4px); /* Subtle backdrop blur */
-  border-radius: 8px;
+  border-radius: 999px;
   transition: background-color 0.3s ease-in-out;
 }
 
-vaadin-button{
-  padding: 0.7rem;
+vaadin-button[theme~="primary"] {
+  color: #fff; /* White text */
+  background-color: rgba(0, 81, 255, 0.6);
+  padding: 1.5rem;
+  border-radius: 13px;
+  min-width: 120px;
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+  color: white;
+  font-size: 16px; 
+  text-transform: uppercase; 
+  transition: all 0.3s ease; 
+}
+
+vaadin-button[theme~="primary"]:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+vaadin-button[theme~="primary"]:active {
+  background-color: #004080; /* Even darker blue on active */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Less shadow on active */
+  transform: translateY(0); /* Reset lift on active */
 }
 
 vaadin-message-input{
@@ -149,11 +181,19 @@ vaadin-message-input{
   align-items: center;
 }
 
+/* Apply border-radius to the vaadin-text-area's input field */
+vaadin-text-area::part(input-field) {
+  border-radius: 999px !important;
+  padding: 5px;
+}
+
+
 textarea[slot="textarea"]
 {
   padding: 0.7rem;
   background-color: rgba(255, 255, 255, 0.3); /* Transparent background with opacity */
   color: white;
+  border-radius: 999px;
 }
 
 .chat-app-view .chat-container vaadin-message-input:hover {
@@ -176,15 +216,27 @@ textarea[slot="textarea"]
 }
 
 
-vaadin-message{
+vaadin-message {
   color: white;
 }
 
-[part='time'] {
-  color: white;
+vaadin-message::part(time) {
+  color: rgb(138, 137, 137);
   font-size: var(--lumo-font-size-s);
 }
 
+vaadin-message::part(name) {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase; 
+  font-family: 'Courier New', Courier, monospace
+}
+
+vaadin-message::part(message) {
+  font-size: 14px;
+  color: rgba(255, 255, 255);
+}
 
 
 /* Mobile Responsiveness */
