@@ -2,6 +2,7 @@ package com.example.application.views;
 
 import com.example.application.security.SecurityService;
 import com.example.application.views.chatapp.ChatAppView;
+import com.example.application.views.FileUploadView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
@@ -63,15 +64,22 @@ public class MainLayout extends AppLayout {
         user.addClassName("User-Name");
         VerticalLayout avatarAndName = new VerticalLayout(user,logout);
         avatarAndName.addClassNames(LumoUtility.Margin.Top.AUTO, Width.FULL);
-        HorizontalLayout hz = new HorizontalLayout(new Icon(VaadinIcon.CHAT),
+
+        // Chat Link
+        HorizontalLayout chatLink = new HorizontalLayout(new Icon(VaadinIcon.CHAT),
                 new RouterLink("Chat", ChatAppView.class));
-        hz.addClassName("Chat-Link-Hz");
-        VerticalLayout drawerContent = new VerticalLayout(hz, avatarAndName );
+        chatLink.addClassName("Chat-Link-Hz");
+
+        // File Upload Link
+        HorizontalLayout uploadLink = new HorizontalLayout(new Icon(VaadinIcon.UPLOAD),
+                new RouterLink("File Upload", FileUploadView.class));
+        uploadLink.addClassName("Chat-Link-Hz");
+
+        // Combine both links
+        VerticalLayout drawerContent = new VerticalLayout(chatLink, uploadLink, avatarAndName);
         drawerContent.addClassName("linkUsernameLogout");
         drawerContent.setSpacing(false); // Prevent spacing between the navigation and logout
         drawerContent.setSizeFull(); // Ensure it fills the available space
-
         addToDrawer(header, new Scroller(drawerContent));
-
     }
 }
