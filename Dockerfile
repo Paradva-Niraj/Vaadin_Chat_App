@@ -1,22 +1,27 @@
-# Use Eclipse Temurin JDK 17 as the base image
-FROM eclipse-temurin:17-jdk
+# Build stage
+FROM eclipse-temurin:17-jdk-jammy as builder
+WORKDIR /workspace/app
 
-# Set the working directory inside the container
+# Copy Maven wrapper and POM first
+COPY .mvn .mvn
+COPY mvnw .
+COPY pom.xml .
+
+# Download dependencies
+RUN ./mvnw dependency:go-offline
+
+# Copy source files
+COPY src src
+
+# Build with production profile
+RUN ./mvnw clean package -Pproduction -DskipTests
+
+# Runtime stage
+FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
-# Copy the Maven wrapper and pom.xml
-COPY mvnw mvnw.cmd pom.xml ./
-COPY .mvn .mvn
+# Copy built JAR
+COPY --from=builder /workspace/app/target/*.jar app.jar
 
-# Grant execute permission to the Maven wrapper
-RUN chmod +x mvnw
-
-# Build the application
-RUN ./mvnw clean package -DskipTests
-
-# Copy the built JAR file to the container
-COPY target/*.jar app.jar
-
-
-# Run the application
-CMD ["java", "-jar", "app.jar"]
+# Run application
+ENTRYPOINT ["java", "-jar", "app.jar"]
