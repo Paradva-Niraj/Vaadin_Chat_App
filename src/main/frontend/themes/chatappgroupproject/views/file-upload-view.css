@@ -1,0 +1,48 @@
+
+.upload-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--lumo-base-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+vaadin-upload {
+    border: 2px dashed var(--lumo-primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    background-color: var(--lumo-contrast-5pct);
+    transition: background-color 0.3s;
+}
+
+vaadin-upload:hover {
+    background-color: var(--lumo-contrast-10pct);
+}
+
+.file-list {
+    margin-top: 20px;
+}
+
+.file-list-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: var(--lumo-contrast-5pct);
+}
+
+.file-icon {
+    margin-right: 10px;
+    color: var(--lumo-primary-color);
+}
+
+.file-name {
+    flex-grow: 1;
+}
+
+.file-actions {
+    display: flex;
+    gap: 5px;
+}
