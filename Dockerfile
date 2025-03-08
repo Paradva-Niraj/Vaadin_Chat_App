@@ -7,6 +7,9 @@ COPY .mvn .mvn
 COPY mvnw .
 COPY pom.xml .
 
+# Add execute permissions to mvnw
+RUN chmod +x mvnw
+
 # Download dependencies
 RUN ./mvnw dependency:go-offline
 
@@ -19,9 +22,5 @@ RUN ./mvnw clean package -Pproduction -DskipTests
 # Runtime stage
 FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
-
-# Copy built JAR
 COPY --from=builder /workspace/app/target/*.jar app.jar
-
-# Run application
 ENTRYPOINT ["java", "-jar", "app.jar"]
