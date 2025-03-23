@@ -1,10 +1,13 @@
+/* Drawer and Navbar Styles */
 vaadin-scroller[slot="drawer"] {
   background-color: rgba(36, 36, 36, 0.7);
   backdrop-filter: blur(12px);
 }
-.linkUsernameLogout{
+
+.linkUsernameLogout {
   padding-bottom: 0px;
 }
+
 vaadin-app-layout::part(drawer) {
   background-color: transparent;
 }
@@ -15,7 +18,7 @@ vaadin-app-layout::part(drawer) {
   justify-content: center;
   min-height: var(--lumo-size-xl);
   box-sizing: border-box;
-  background-color: #1f1f1f;
+  background-color: rgba(31, 31, 31, 0.9);
   border-bottom: 1px solid #333;
 }
 
@@ -26,13 +29,14 @@ vaadin-app-layout::part(drawer) {
 
 vaadin-app-layout::part(navbar) {
   overflow: hidden;
-  background: rgba(36, 36, 36, 0.7); /* Darkened backdrop */
+  background: rgba(36, 36, 36, 0.7);
   backdrop-filter: blur(12px);
   color: #fff;
   padding: var(--lumo-space-s);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Softer, more prominent shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Scrollbar Styles */
 vaadin-scroller[slot="drawer"]::-webkit-scrollbar {
   width: 8px;
 }
@@ -46,6 +50,7 @@ vaadin-scroller[slot="drawer"]::-webkit-scrollbar-thumb:hover {
   background-color: #666;
 }
 
+/* Header Styles */
 h1 {
   color: #ffffff;
   font-size: 2rem;
@@ -54,21 +59,9 @@ h1 {
   font-weight: bold;
 }
 
-[slot="drawer"]:is(header, footer) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--lumo-space-s) var(--lumo-space-m);
-  background-color: #1f1f1f;
-  border-bottom: 1px solid #333;
-}
-
-[slot="drawer"]:is(header, footer):is(:empty) {
-  display: none;
-}
-
+/* Side Navigation Styles */
 vaadin-side-nav {
-  background-color: #1e1e1eae;
+  background-color: rgba(30, 30, 30, 0.9);
   color: #e0e0e0;
   width: 100%;
   padding: var(--lumo-space-s);
@@ -79,7 +72,7 @@ vaadin-side-nav-item vaadin-icon:hover {
 }
 
 vaadin-side-nav-item:hover {
-  background-color: #333;
+  background-color: rgba(51, 51, 51, 0.8);
   color: #ffffff;
 }
 
@@ -87,6 +80,7 @@ vaadin-side-nav-item:hover vaadin-icon {
   color: #ffffff;
 }
 
+/* Drawer Toggle Button Styles */
 vaadin-drawer-toggle {
   background-color: transparent;
   color: #ffffff;
@@ -99,27 +93,23 @@ vaadin-drawer-toggle:hover {
   color: #ff6f61;
 }
 
-h3 {
-  color: white;
-}
-
+/* Logout Button Styles */
 .logout-Button {
   background-color: rgba(255, 0, 0, 0.4);
   border-radius: 12px;
-  border: solid 2px red ;
+  border: solid 2px red;
   backdrop-filter: blur(12px);
   color: #fff;
   width: 80%;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 20px auto;
   display: flex;
   justify-self: center;
-  padding: 25px 30px;
+  padding: 15px 20px;
   font-weight: bold;
   font-size: 16px;
   text-transform: uppercase;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
+  transition: all 0.3s;
 }
 
 .logout-Button:hover {
@@ -128,6 +118,7 @@ h3 {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Username Display Styles */
 .usernameLogout {
   display: flex;
   justify-content: center;
@@ -141,27 +132,28 @@ h3 {
   justify-content: center;
   align-items: center;
   text-align: center;
-  text-transform: uppercase; 
   font-family: 'Courier New', Courier, monospace;
 }
-.User-Name H3{
+
+.User-Name h3 {
   font-weight: 500;
-font-size: xx-large;
+  font-size: xx-large;
+  color: #ffffff;
 }
-.User-Name vaadin-icon{
+
+.User-Name vaadin-icon {
   width: 50px;
   height: 50px;
   padding: 10px;
   border-radius: 999px;
-  text-transform: uppercase;
-  display: flex;
   background-color: rgba(0, 81, 255, 0.4);
   box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 
-
+/* Chat Link Styles */
 .Chat-Link-Hz {
   background-color: rgba(0, 81, 255, 0.2);
   width: 100%;

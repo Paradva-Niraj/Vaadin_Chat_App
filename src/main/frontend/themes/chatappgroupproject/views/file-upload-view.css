@@ -1,48 +1,233 @@
-
-.upload-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: var(--lumo-base-color);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* Global Styles */
+:root {
+  --primary-color: #6200ea;
+  --primary-light: rgba(98, 0, 234, 0.1);
+  --accent-color: #03dac6;
+  --success-color: #00c853;
+  --error-color: #ff5252;
+  --background-dark: #121212;
+  --card-background: #1e1e1e;
+  --card-background-light: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --border-radius: 12px;
+  --transition: all 0.3s ease;
 }
 
+/* File Upload View Styles */
+.file-upload-view {
+  background-color: var(--background-dark);
+  color: var(--text-primary);
+  font-family: "Roboto", "Segoe UI", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Content Container */
+.content-container {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Title Header */
+.title-header {
+  font-size: 2.2rem;
+  font-weight: 300;
+  margin: 0;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* Upload Card */
+.upload-card {
+  background: linear-gradient(145deg, #1f1f1f, #2d2d2d);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.upload-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Upload Container */
+.upload-container {
+  width: 100%;
+  transition: var(--transition);
+}
+
+/* Upload Component Customization */
 vaadin-upload {
-    border: 2px dashed var(--lumo-primary-color);
-    border-radius: 10px;
-    padding: 20px;
-    background-color: var(--lumo-contrast-5pct);
-    transition: background-color 0.3s;
+  --lumo-primary-color: var(--primary-color);
+  --lumo-primary-text-color: var(--primary-color);
+  --lumo-error-color: var(--error-color);
+  --lumo-success-color: var(--success-color);
+}
+
+.upload-component, vaadin-upload::part(primary-buttons){
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row ;
+}
+
+vaadin-upload-file::part(row){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+flex-direction: column;
+}
+
+vaadin-upload-file::part(info){
+    display: none;
+}
+
+
+
+vaadin-upload::part(drop-label) {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  font-weight: 300;
+  width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+vaadin-upload::part(drop-label-icon) {
+  color: var(--primary-color);
+  width: 48px;
+  height: 48px;
 }
 
 vaadin-upload:hover {
-    background-color: var(--lumo-contrast-10pct);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
-.file-list {
-    margin-top: 20px;
+/* Grid Card */
+.grid-card {
+  background: linear-gradient(145deg, #1f1f1f, #2d2d2d);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transition: var(--transition);
+  overflow: hidden;
 }
 
-.file-list-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    background-color: var(--lumo-contrast-5pct);
+/* File Grid */
+.file-grid {
+  --lumo-primary-color: var(--primary-color);
+  --lumo-primary-text-color: var(--primary-color);
+  --lumo-body-text-color: var(--text-primary);
+  background: transparent;
 }
 
-.file-icon {
-    margin-right: 10px;
-    color: var(--lumo-primary-color);
+
+/* Grid Row Hover */
+vaadin-grid::part(row):hover {
+  background-color: rgba(98, 0, 234, 0.1);
 }
 
-.file-name {
-    flex-grow: 1;
+/* Grid Cell */
+vaadin-grid::part(cell) {
+  padding: 12px 16px;
+  background-color: rgba(25, 21, 30, 0.505);
 }
 
+/* Grid Row Hover */
+vaadin-grid::part(row):hover {
+    background-color: rgba(98, 0, 234, 0.1);
+  }
+
+  /* Grid Header */
+vaadin-grid::part(header-cell) {
+    background-color: rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+    color: var(--accent-color);
+  }
+
+/* Button Styles */
+vaadin-button {
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+}
+
+vaadin-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Primary Button */
+vaadin-button[theme~="primary"] {
+  background-color: var(--primary-color);
+}
+
+vaadin-button[theme~="primary"]:hover {
+  background-color: #7c4dff;
+}
+
+/* Error Button */
+vaadin-button[theme~="error"] {
+  background-color: var(--error-color);
+}
+
+vaadin-button[theme~="error"]:hover {
+  background-color: #ff7676;
+}
+
+/* Icons in Buttons */
+vaadin-button iron-icon {
+  margin-right: 8px;
+}
+
+/* File Actions */
 .file-actions {
-    display: flex;
-    gap: 5px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
 }
+
+/* Download Button */
+.download-link {
+  text-decoration: none;
+}
+
+/* Notification Styles */
+vaadin-notification-card {
+  border-radius: var(--border-radius);
+  /* padding: 16px; */
+  width: fit-content;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .title-header {
+    font-size: 1.8rem;
+  }
+  
+  .upload-card, .grid-card {
+    padding: 1rem;
+  }
+  
+  vaadin-grid::part(cell) {
+    padding: 8px 12px;
+  }
+}
+
+
+.section-title, .section-icon{
+    margin-bottom: 20px;
+}
+
