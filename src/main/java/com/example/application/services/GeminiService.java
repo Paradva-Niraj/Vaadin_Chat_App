@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class GeminiService {
@@ -15,7 +15,7 @@ public class GeminiService {
     private static final String API_KEY = "AIzaSyBEdn5NyxjXPXUUa5tn3ho88cMu9vOSm0s";
     
     private final WebClient webClient;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    // private final ObjectMapper objectMapper = new ObjectMapper();
 
     public GeminiService(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder

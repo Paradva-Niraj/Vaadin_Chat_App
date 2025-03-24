@@ -2,14 +2,12 @@ package com.example.application.views;
 
 import com.example.application.security.SecurityService;
 import com.example.application.views.chatapp.ChatAppView;
-import com.example.application.views.FileUploadView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
@@ -48,10 +46,7 @@ public class MainLayout extends AppLayout {
     }
 
     private void createDrawer() {
-        Span appName = new Span("Groups");
-        appName.addClassNames(LumoUtility.FontWeight.SEMIBOLD, LumoUtility.FontSize.LARGE);
-        Header header = new Header(appName);
-
+ 
         // Ensure user is authenticated and handle null values gracefully
         String username = "Guest";
         if (securityService.getAuthenticatedUser() != null) {
@@ -60,11 +55,14 @@ public class MainLayout extends AppLayout {
 
         Button logout = new Button("Log out ", e -> securityService.logout());
         logout.addClassName("logout-Button");
-        HorizontalLayout user = new HorizontalLayout(new Icon(VaadinIcon.USER),new H3(username));
+        HorizontalLayout user = new HorizontalLayout(new Icon(VaadinIcon.HEADSET),new H3(username));
         user.addClassName("User-Name");
-        VerticalLayout avatarAndName = new VerticalLayout(user,logout);
+        VerticalLayout avatarAndName = new VerticalLayout(logout);
         avatarAndName.addClassNames(LumoUtility.Margin.Top.AUTO, Width.FULL);
-
+        // Span appName = new Span("Fun Hub");
+        
+        // appName.addClassNames(LumoUtility.FontWeight.SEMIBOLD, LumoUtility.FontSize.LARGE);
+        Header header = new Header(user);
         // Chat Link
         HorizontalLayout chatLink = new HorizontalLayout(new Icon(VaadinIcon.CHAT),
                 new RouterLink("Chat", ChatAppView.class));
@@ -75,8 +73,12 @@ public class MainLayout extends AppLayout {
                 new RouterLink("File Upload", FileUploadView.class));
         uploadLink.addClassName("Chat-Link-Hz");
 
+        // File Upload Link
+        HorizontalLayout AIChatLink = new HorizontalLayout(new Icon(VaadinIcon.UPLOAD),
+                new RouterLink("Chat AI", ChatWithAIView.class));
+        AIChatLink.addClassName("Chat-Link-Hz");
         // Combine both links
-        VerticalLayout drawerContent = new VerticalLayout(chatLink, uploadLink, avatarAndName);
+        VerticalLayout drawerContent = new VerticalLayout(chatLink, uploadLink,AIChatLink, avatarAndName);
         drawerContent.addClassName("linkUsernameLogout");
         drawerContent.setSpacing(false); // Prevent spacing between the navigation and logout
         drawerContent.setSizeFull(); // Ensure it fills the available space

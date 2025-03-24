@@ -6,61 +6,58 @@ body {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  /* background: #121212; */
   color: #e0e0e0;
   font-family: "Roboto", sans-serif;
   margin: 0;
-  overflow: hidden;
   padding: 0;
+  min-height: 100vh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  backdrop-filter: blur(10px);
 }
 
 /* Layout */
 .chat-app-view {
   display: flex;
-  flex-direction: row;
   height: 100vh;
   width: 100%;
+  max-width: 1400px;
+  background: #121212f6;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 12px;
-  backdrop-filter: blur(15px);
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
-  transition: all 0.3s ease-in-out;
 }
 
+/* Sidebar */
 .chat-app-view aside {
-  background-color: rgba(36, 36, 36, 0.8);
+  background: #121212;
   width: 20rem;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid rgba(51, 51, 51, 0.5);
-  box-shadow: 2px 0px 15px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  border-left: 7px double #2a2828;
 }
 
 /* Header */
 .chat-app-view aside header {
-  padding: 1rem;
-  border-bottom: 1px solid #333;
+  padding: 1.5rem;
+  border-bottom: 3px solid #2a2828;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ffffff;
+  background: #121212;
 }
 
 .chat-app-view aside header h3 {
   color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 500;
   margin: 0;
 }
 
 .chat-app-view aside header vaadin-avatar-group {
-  --vaadin-avatar-group-overlap: 10%;
+  --vaadin-avatar-group-overlap: 8px;
 }
 
 /* Tabs */
@@ -68,181 +65,207 @@ body {
   flex: 1;
   overflow-y: auto;
   padding: 0.5rem 0;
-  display: flex;
-  border-radius: 0px;
-  flex-direction: column;
+  scrollbar-width: none;
 }
 
-span::part(time) {
-  color: white !important;
+.chat-app-view aside vaadin-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .chat-app-view aside vaadin-tabs vaadin-tab {
-  color: #b3b3b3;
-  text-align: center;
+  color: #bdbdbd; /* Soft, readable gray for dark themes */
   display: flex;
-  justify-content: start;
   align-items: center;
-  font-size: large;
-  gap: 10px;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  margin: 0.5rem 1rem;
-  background-color: rgba(51, 51, 51, 0.6);
-  transition: all 0.3s ease;
+  gap: 14px;
+  width: 90%;
+  justify-content: flex-start;
+  padding: 1rem 1.75rem;
+  margin: 0.5rem auto;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(40, 40, 40, 0.7), rgba(30, 30, 30, 0.7)); /* Deeper dark gradient */
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4), /* Subtle shadow for depth */
+              -1px -1px 4px rgba(50, 50, 50, 0.1);
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
+  font-size: 1rem;
+  font-weight: 400; /* Lighter font weight for a more subtle look */
 }
 
 .chat-app-view aside vaadin-tabs vaadin-tab:hover {
-  background-color: rgba(51, 51, 51, 0.9);
+  background: linear-gradient(145deg, rgba(50, 50, 50, 0.8), rgba(40, 40, 40, 0.8)); /* Slightly brighter, but still dark, hover effect */
+  color: #e0e0e0; /* Brighter text on hover, but still in the dark theme range */
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5), /* Increased shadow on hover */
+              -2px -2px 6px rgba(60, 60, 60, 0.2);
+}
+
+.chat-app-view aside vaadin-tabs vaadin-tab:active {
+  transform: translateY(0);
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.4), /* Inset shadow for active state */
+              inset -1px -1px 3px rgba(50, 50, 50, 0.1);
+}
+
+.chat-app-view aside vaadin-tabs vaadin-tab:hover {
+  background: rgba(60, 60, 60, 0.8);
   color: #ffffff;
-  transform: scale(1.05);
 }
 
-/* Specific Tab Styles */
-.tab-general {
-  background-color: #3949ab;
-  color: #e8eaf6;
-  font-weight: 600;
-  border-radius: 0.5rem;
-  margin: 0.25rem 1rem;
+.chat-app-view aside vaadin-tabs vaadin-tab[selected] {
+  background: #212121;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-.tab-support {
-  background-color: #ff7043;
-  color: #fff3e0;
-  font-weight: 600;
-  border-radius: 0.5rem;
-  margin: 0.25rem 1rem;
-}
 
-.tab-casual {
-  background-color: #616161;
-  color: #f5f5f5;
-  font-weight: 400;
-  font-style: italic;
-  border-radius: 0.5rem;
-  margin: 0.25rem 1rem;
-}
+
+.tab-general { background: #3f51b5; color: #e8eaf6; }
+.tab-support { background: #f44336; color: #ffebee; }
+.tab-casual { background: #757575; color: #f5f5f5; }
 
 /* Chat Container */
 .chat-app-view .chat-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(145deg, rgba(18, 18, 18, 0.9), rgba(30, 30, 30, 0.9));
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  background: #212121;
+  border-radius: 0 16px 16px 0;
+}
+
+/* Message List */
+.chat-app-view .chat-container vaadin-message-list {
+  flex-grow: 1;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 100, 100, 0.5) transparent;
 }
 
-/* Message Input */
-.chat-app-view .chat-container vaadin-message-input {
-  border-top: 1px solid #333;
-  padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
-  border-radius: 999px;
-  transition: background-color 0.3s ease-in-out;
-}
-
-vaadin-button[theme~="primary"] {
-  color: #fff;
-  background-color: rgba(0, 81, 255, 0.6);
-  padding: 1.5rem;
-  border-radius: 13px;
-  min-width: 120px;
-  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 -2px 4px rgba(0, 0, 0, 0.15);
-  font-size: 16px;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-}
-
-vaadin-button[theme~="primary"]:hover {
-  background-color: #0056b3;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
-}
-
-vaadin-button[theme~="primary"]:active {
-  background-color: #004080;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transform: translateY(0);
-}
-
-vaadin-message-input {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Apply border-radius to the vaadin-text-area's input field */
-vaadin-text-area::part(input-field) {
-  border-radius: 999px !important;
-  padding: 5px;
-}
-
-textarea[slot="textarea"] {
-  padding: 0.7rem;
-  background-color: rgba(255, 255, 255, 0.3);
-  color: white;
-  border-radius: 999px;
-}
-
-.chat-app-view .chat-container vaadin-message-input:hover {
-  background-color: rgba(155, 255, 255, 0.2);
-  color: white;
-}
-
-/* Scrollbar Styling */
 .chat-app-view .chat-container vaadin-message-list::-webkit-scrollbar {
   width: 6px;
 }
 
 .chat-app-view .chat-container vaadin-message-list::-webkit-scrollbar-thumb {
-  background-color: #444;
+  background: rgba(100, 100, 100, 0.5);
   border-radius: 10px;
 }
 
 .chat-app-view .chat-container vaadin-message-list::-webkit-scrollbar-thumb:hover {
-  background-color: #666;
+  background: rgba(120, 120, 120, 0.7);
+}
+vaadin-message-list{
+  padding: 40px 50px;
 }
 
+/* Messages */
 vaadin-message {
-  color: white;
+  display: flex;
+  max-width: 70%;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
 }
 
-vaadin-message::part(time) {
-  color: rgb(138, 137, 137);
-  font-size: var(--lumo-font-size-s);
+vaadin-message.current-user {
+  margin-left: auto;
+  flex-direction: row-reverse;
 }
 
-vaadin-message::part(name) {
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: 0.1rem;
-  text-transform: uppercase;
-  font-family: 'Courier New', Courier, monospace;
+vaadin-message.current-user::part(message) {
+  background: #0288d1;
+  border: 1px solid rgba(2, 136, 209, 0.5);
+}
+
+vaadin-message.other-user {
+  margin-right: auto;
+  margin-left: 2.5rem;
+}
+
+vaadin-message.other-user::part(message)::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 10px 0;
+  border-color: transparent #333 transparent transparent;
+  filter: drop-shadow(-2px 0 1px rgba(0, 0, 0, 0.2));
 }
 
 vaadin-message::part(message) {
-  font-size: 14px;
-  color: rgba(255, 255, 255);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: #333;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
+
+vaadin-message::part(name) {
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: capitalize;
+  color: #ffffff;
+  letter-spacing: 2px;
+  margin-bottom: 0.25rem;
+}
+
+vaadin-message::part(time) {
+  font-size: 0.7rem;
+  color: rgba(180, 180, 180, 0.8);
+  margin-top: 0.25rem;
+  text-align: right;
+}
+
+vaadin-message::part(avatar) {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+vaadin-message:hover::part(message) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Input Layout */
+.chat-app-view .input-layout {
+  padding: 1rem 4rem;
+ margin-bottom: 1px;
+}
+
+
+.chat-input::part(input-field):focus-within {
+  border-color: #0288d1;
+  box-shadow: 0 0 0 2px rgba(2, 136, 209, 0.2);
+}
+
+.chat-input::part(input-field)::placeholder {
+  color: rgba(180, 180, 180, 0.7);
+}
+
+
 
 /* Mobile Responsiveness */
 @media screen and (max-width: 740px) {
   .chat-app-view {
     flex-direction: column-reverse;
+    max-width: 100%;
+    border-radius: 0;
   }
 
   .chat-app-view aside {
     width: 100%;
+    height: 60px;
     flex-direction: row;
     border-right: none;
-    border-top: 1px solid #333;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .chat-app-view aside header {
@@ -250,13 +273,18 @@ vaadin-message::part(message) {
   }
 
   .chat-app-view aside vaadin-tabs {
-    flex: 1;
-    overflow-x: auto;
-    padding: 0.5rem 0;
     flex-direction: row;
+    overflow-x: auto;
+    padding: 0.25rem;
   }
 
   .chat-app-view aside vaadin-tabs vaadin-tab {
-    margin: 0 0.25rem;
+    margin: 0 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .chat-app-view .chat-container {
+    border-radius: 0;
   }
 }
