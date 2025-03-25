@@ -1,7 +1,6 @@
 package com.example.application.security;
 
 import com.vaadin.flow.spring.security.AuthenticationContext;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,8 +12,8 @@ public class SecurityService {
         this.authenticationContext = authenticationContext;
     }
 
-    public UserDetails getAuthenticatedUser() {
-        return authenticationContext.getAuthenticatedUser(UserDetails.class).get();
+    public String getAuthenticatedUsername() {
+        return authenticationContext.getPrincipalName().orElse("Anonymous");
     }
 
     public void logout() {

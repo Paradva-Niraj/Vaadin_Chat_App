@@ -22,7 +22,6 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.Tabs.Orientation;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoUtility.AlignItems;
@@ -37,23 +36,19 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Overflow;
 import com.vaadin.flow.theme.lumo.LumoUtility.Padding;
 import com.vaadin.flow.theme.lumo.LumoUtility.Width;
 import jakarta.annotation.security.PermitAll;
-import org.springframework.beans.factory.annotation.Autowired; // Import Autowired
 
 import java.util.UUID;
-import org.vaadin.lineawesome.LineAwesomeIconUrl;
-import com.example.application.services.GeminiService; // Import GeminiService
 
 @PermitAll
 @PageTitle("Conversation")
 @Route(value = "", layout = MainLayout.class)
-@Menu(order = 1, icon = LineAwesomeIconUrl.COMMENTS)
+// @Menu(order = 1, icon = LineAwesomeIconUrl.COMMENTS) // Uncomment if LineAwesomeIconUrl is available
 public class ChatAppView extends HorizontalLayout {
+
     @SuppressWarnings("unused")
     private final SecurityService securityService;
 
-    @SuppressWarnings("unused")
-    @Autowired
-    private transient GeminiService geminiService;
+
 
     public static class ChatTab extends Tab {
         private final ChatInfo chatInfo;
@@ -71,7 +66,7 @@ public class ChatAppView extends HorizontalLayout {
         private String name;
         private int unread;
         private Span unreadBadge;
-        private MessageManager messageManager; // Add MessageManager
+        private MessageManager messageManager;
 
         private ChatInfo(String name, int unread) {
             this.name = name;
@@ -118,8 +113,8 @@ public class ChatAppView extends HorizontalLayout {
     private ChatInfo currentChat = chats[0];
     private Tabs tabs;
 
-    private CollaborationAvatarGroup avatarGroup; // Only create once
-    private UserInfo userInfo; // Hold the user info
+    private CollaborationAvatarGroup avatarGroup;
+    private UserInfo userInfo;
     private CollaborationMessageList list;
     @SuppressWarnings("unused")
     private transient MessageManager mm;
@@ -129,20 +124,20 @@ public class ChatAppView extends HorizontalLayout {
         addClassNames("chat-app-view", Width.FULL, Display.FLEX, Flex.AUTO);
         setSpacing(false);
         setPadding(false);
-        String username = "Guest";
 
-        // Initialize the user info only once
-        if (securityService.getAuthenticatedUser() != null) {
-            username = securityService.getAuthenticatedUser().getUsername();
-            userInfo = new UserInfo(UUID.randomUUID().toString(), username);
-        } else {
-            userInfo = new UserInfo(UUID.randomUUID().toString(), username);
+        // Initialize user info with JWT-based username
+        String username = securityService.getAuthenticatedUsername(); // Default to "Anonymous" if null
+        String jwt = securityService.getAuthenticatedUsername();
+        System.out.println(jwt);
+        if (jwt != null) {
+            getUI().ifPresent(ui -> ui.navigate("login"));
         }
+        userInfo = new UserInfo(UUID.randomUUID().toString(), username);
 
         tabs = new Tabs();
         for (ChatInfo chat : chats) {
             MessageManager mm = new MessageManager(this, userInfo, chat.getCollaborationTopic());
-            chat.setMessageManager(mm); // Set MessageManager to ChatInfo
+            chat.setMessageManager(mm);
             mm.setMessageHandler(context -> {
                 if (currentChat != chat) {
                     chat.incrementUnread();
@@ -179,12 +174,10 @@ public class ChatAppView extends HorizontalLayout {
 
         sendButton.addClickListener(e -> {
             String message = messageInput.getValue().trim();
-
             if (!message.isEmpty()) {
                 currentChat.getMessageManager().submit(message);
                 messageInput.clear();
                 messageInput.focus();
-                
             }
         });
 
@@ -202,7 +195,6 @@ public class ChatAppView extends HorizontalLayout {
         H3 channels = new H3("Channels");
         channels.addClassNames(Flex.GROW, Margin.NONE);
 
-        // Create the avatar group only once to avoid double entries
         if (avatarGroup == null) {
             avatarGroup = new CollaborationAvatarGroup(userInfo, "chat");
             avatarGroup.setMaxItemsVisible(4);
@@ -217,7 +209,6 @@ public class ChatAppView extends HorizontalLayout {
         setSizeFull();
         expand(chatContainer);
 
-        // Change the topic id of the chat when a new tab is selected
         tabs.addSelectedChangeListener(event -> {
             currentChat = ((ChatTab) event.getSelectedTab()).getChatInfo();
             currentChat.resetUnread();
@@ -232,22 +223,23 @@ public class ChatAppView extends HorizontalLayout {
         Span badge = new Span();
         chat.setUnreadBadge(badge);
         badge.getElement().getThemeList().add("badge small contrast");
-        tab.add(new Icon(chat.name=="General"?VaadinIcon.MEGAPHONE:chat.name=="Support"?VaadinIcon.TOOLS:chat.name=="Casual"?VaadinIcon.COMMENT_ELLIPSIS:VaadinIcon.COMMENT_ELLIPSIS),new Span(chat.name), badge);
+        tab.add(
+            new Icon(chat.name.equals("General") ? VaadinIcon.MEGAPHONE :
+                     chat.name.equals("Support") ? VaadinIcon.TOOLS :
+                     chat.name.equals("Casual") ? VaadinIcon.COMMENT_ELLIPSIS : VaadinIcon.COMMENT_ELLIPSIS),
+            new Span(chat.name),
+            badge
+        );
         return tab;
     }
 
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         Page page = attachEvent.getUI().getPage();
-        page.retrieveExtendedClientDetails(details -> {
-            setMobile(details.getWindowInnerWidth() < 740);
-        });
-        page.addBrowserWindowResizeListener(e -> {
-            setMobile(e.getWidth() < 740);
-        });
+        page.retrieveExtendedClientDetails(details -> setMobile(details.getWindowInnerWidth() < 740));
+        page.addBrowserWindowResizeListener(e -> setMobile(e.getWidth() < 740));
     }
 
-    
     private void setMobile(boolean mobile) {
         tabs.setOrientation(mobile ? Orientation.HORIZONTAL : Orientation.VERTICAL);
     }

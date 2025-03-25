@@ -1,0 +1,288 @@
+/* Global Reset for Consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+/* Main Signup View Container */
+.signup-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: none; /* Let body background show */
+    padding: 20px; /* Increased from 10px for breathing room */
+}
+
+.signup-view::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #121212;
+    opacity: 0.9;
+    z-index: 1;
+}
+
+/* Heading Styling */
+h1 {
+    color: #ffffff;
+    font-size: 2rem; /* Consistent size, proportional */
+    font-weight: 600;
+    letter-spacing: 0.8px; /* Slightly reduced for balance */
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px; /* Increased from 15px for spacing */
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Container for Signup Form and Image */
+.container-class-signup-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(30, 30, 30, 0.9); /* Darker translucent background */
+    border-radius: 15px;
+    padding: 35px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    max-width: 1000px;
+    width: 100%;
+    z-index: 999;
+    overflow: hidden;
+    animation: slideIn 0.6s ease-out;
+}
+
+
+vaadin-combo-box {
+    width: 100%;
+    margin: 10px 0;
+    background: rgba(40, 40, 40, 0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+
+  vaadin-combo-box-overlay {
+    z-index: 999 !important;
+  }
+      
+/* Signup Form Layout */
+.container-class-signup-image > vaadin-vertical-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centers form vertically */
+    padding: 20px; /* Increased from 15px for comfort */
+    width: 50%; /* Equal to image width */
+    max-width: none; /* Remove max-width to match image */
+}
+
+/* Input Fields (Email, Username, Password, Age, Gender) */
+vaadin-email-field,
+vaadin-text-field,
+vaadin-password-field,
+vaadin-integer-field,
+vaadin-combo-box {
+    width: 100%;
+    margin: 10px 0; /* Increased from 8px for spacing */
+    background: rgba(40, 40, 40, 0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px; /* Increased from 6px for comfort */
+    transition: all 0.3s ease;
+}
+
+vaadin-email-field input,
+vaadin-text-field input,
+vaadin-password-field input,
+vaadin-integer-field input,
+vaadin-combo-box input {
+    color: #e0e0e0;
+    font-size: 0.95rem; /* Slightly increased from 0.9rem for readability */
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+vaadin-email-field label,
+vaadin-text-field label,
+vaadin-password-field label,
+vaadin-integer-field label,
+vaadin-combo-box label {
+    color: #b0b0b0;
+    font-size: 0.85rem; /* Slightly increased from 0.8rem for clarity */
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+vaadin-email-field:hover,
+vaadin-text-field:hover,
+vaadin-password-field:hover,
+vaadin-integer-field:hover,
+vaadin-combo-box:hover,
+vaadin-email-field:focus-within,
+vaadin-text-field:focus-within,
+vaadin-password-field:focus-within,
+vaadin-integer-field:focus-within,
+vaadin-combo-box:focus-within {
+    background: rgba(50, 50, 50, 0.9);
+    border-color: #26a69a;
+    box-shadow: 0 0 10px rgba(38, 166, 154, 0.3);
+}
+
+vaadin-email-field:focus-within label,
+vaadin-text-field:focus-within label,
+vaadin-password-field:focus-within label,
+vaadin-integer-field:focus-within label,
+vaadin-combo-box:focus-within label {
+    color: #26a69a;
+}
+
+/* Password Visibility Toggle */
+vaadin-password-field-button {
+    color: #e0e0e0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+vaadin-password-field-button:hover {
+    color: #26a69a;
+}
+
+/* Signup Button */
+vaadin-button {
+    width: 100%;
+    margin: 15px 0 0 0; /* Reduced margin */
+    padding: 30px 10px; /* Reduced padding */
+    border-radius: 8px;
+    font-size: 0.9rem; /* Reduced from 1rem */
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    background: #26a69a;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(38, 166, 154, 0.3);
+    transition: all 0.3s ease;
+}
+
+vaadin-button:hover {
+    background: #2cb9ac;
+    box-shadow: 0 6px 18px rgba(38, 166, 154, 0.5);
+    transform: translateY(-1px);
+}
+
+/* Signup Image Styling */
+.signup-image {
+    width: 50%; /* Equal to form width */
+    height: 450px; /* Increased from 380px to match container height better */
+    background-image: url("signup.svg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.7);
+    position: relative;
+    overflow: hidden;
+}
+
+.signup-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(38, 166, 154, 0.1);
+    opacity: 0.6;
+    z-index: 1;
+    animation: glowPulse 4s infinite ease-in-out;
+}
+
+.already_have_account{
+    width: 100%;
+    margin: 0; /* Reduced margin */
+    padding: 10px; /* Reduced padding */
+    border-radius: 8px;
+    font-size: 0.9rem; /* Reduced from 1rem */
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    background: transparent;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(38, 166, 154, 0.3);
+    transition: all 0.3s ease;
+}
+
+.already_have_account:hover{
+    width: 100%;
+    margin: 0; /* Reduced margin */
+    padding: 10px; /* Reduced padding */
+    border-radius: 8px;
+    font-size: 0.9rem; /* Reduced from 1rem */
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    background: transparent;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(38, 166, 154, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes glowPulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.4; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container-class-signup-image {
+        flex-direction: column;
+        padding: 20px; /* Slightly increased from 15px */
+        max-width: 95%;
+    }
+
+    .container-class-signup-image > vaadin-vertical-layout,
+    .signup-image {
+        width: 100%;
+        max-width: none;
+    }
+
+    .signup-image {
+        height: 250px; /* Consistent with login for mobile */
+        margin-bottom: 15px; /* Increased from 10px for spacing */
+    }
+
+    h1 {
+        font-size: 1.8rem; /* Matches mobile heading */
+    }
+}
