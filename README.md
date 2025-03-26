@@ -14,3 +14,5 @@
 
 ![Laptop View](./livedemoimages/5.png)
 
+![Laptop View](./livedemoimages/6.png)
+
