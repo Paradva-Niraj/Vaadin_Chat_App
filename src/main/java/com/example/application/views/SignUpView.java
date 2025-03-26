@@ -7,6 +7,7 @@ import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
@@ -62,15 +63,14 @@ public class SignUpView extends VerticalLayout {
 
         // Form layout on the right
         VerticalLayout signupLayout = new VerticalLayout(
-            new H1("Sign Up"),
-            new HorizontalLayout(emailField, usernameField),
-            passwordField,
-            new HorizontalLayout(ageField, genderComboBox),
-            signUpButton,
-            loginRedirectButton
-        );
+                new H1("Sign Up"),
+                new HorizontalLayout(emailField, usernameField),
+                passwordField,
+                new HorizontalLayout(ageField, genderComboBox),
+                signUpButton,
+                loginRedirectButton);
         signupLayout.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
-
+        signupLayout.addClassName("inputs-container-signup");
         hl.add(signupImage, signupLayout);
         add(hl);
     }
@@ -83,8 +83,10 @@ public class SignUpView extends VerticalLayout {
         String gender = genderComboBox.getValue();
 
         if (email == null || email.isEmpty() || username == null || username.isEmpty()
-            || password == null || password.isEmpty() || age == null || gender == null || gender.isEmpty()) {
-            Notification.show("Please fill in all fields.");
+                || password == null || password.isEmpty() || age == null || gender == null || gender.isEmpty()) {
+            Notification.show("Please fill all the fields",
+                            3000, Notification.Position.TOP_CENTER)
+                            .addThemeVariants(NotificationVariant.LUMO_ERROR);
             return;
         }
 
@@ -95,19 +97,40 @@ public class SignUpView extends VerticalLayout {
                 @SuppressWarnings("rawtypes")
                 Map user = (Map) response.get("user");
                 if (user != null && user.containsKey("id")) {
-                    Notification.show("Sign up successful! Please log in.");
+                    Notification.show("Sign up successful! Please log in.",
+                    3000, Notification.Position.TOP_CENTER)
+                    .addThemeVariants(NotificationVariant.LUMO_SUCCESS);
                     getUI().ifPresent(ui -> ui.navigate("login"));
                 } else {
-                    Notification.show("Sign up failed: User ID missing in response.");
+                    Notification.show("Sign up failed: User ID missing in response.",
+                    3000, Notification.Position.TOP_CENTER)
+                    .addThemeVariants(NotificationVariant.LUMO_ERROR);
                 }
             } else {
-                Notification.show("Sign up failed: Invalid response from server.");
+                Notification.show("Sign up failed: Invalid response from server.",
+                3000, Notification.Position.TOP_CENTER)
+                .addThemeVariants(NotificationVariant.LUMO_ERROR);
             }
         } catch (Exception e) {
             if (e.getMessage().equals("Username is already taken")) {
-                Notification.show("Username '" + username + "' is already taken. Please choose a different one.");
-            } else {
-                Notification.show("Sign up failed: " + e.getMessage());
+                Notification.show("Username '" + username + "' is already taken. Please choose a different one.",
+                3000, Notification.Position.TOP_CENTER)
+                .addThemeVariants(NotificationVariant.LUMO_ERROR);
+            } 
+            else if (e.getMessage().contains("User already registered")) {
+                Notification.show("Email is already registered | Try Login",
+                3000, Notification.Position.TOP_CENTER)
+                .addThemeVariants(NotificationVariant.LUMO_ERROR);
+            }
+            else if (e.getMessage().contains("Unable to validate email address: invalid format")) {
+                Notification.show("Wrong Email Format",
+                3000, Notification.Position.TOP_CENTER)
+                .addThemeVariants(NotificationVariant.LUMO_ERROR);   
+            }
+            else {
+                Notification.show("Something Unexpected happened: ",
+                3000, Notification.Position.TOP_CENTER)
+                .addThemeVariants(NotificationVariant.LUMO_ERROR);
             }
         }
     }

@@ -66,17 +66,17 @@ public class MainLayout extends AppLayout {
                 Header header = new Header(user);
                 // Chat Link
                 HorizontalLayout chatLink = new HorizontalLayout(new Icon(VaadinIcon.CHAT),
-                                new RouterLink("Chat", ChatAppView.class));
+                                new RouterLink("Group Chat", ChatAppView.class));
                 chatLink.addClassName("Chat-Link-Hz");
 
                 // File Upload Link
-                HorizontalLayout uploadLink = new HorizontalLayout(new Icon(VaadinIcon.UPLOAD),
+                HorizontalLayout uploadLink = new HorizontalLayout(new Icon(VaadinIcon.CLOUD_UPLOAD_O),
                                 new RouterLink("File Upload", FileUploadView.class));
                 uploadLink.addClassName("Chat-Link-Hz");
 
                 // File Upload Link
-                HorizontalLayout AIChatLink = new HorizontalLayout(new Icon(VaadinIcon.UPLOAD),
-                                new RouterLink("Chat AI", ChatWithAIView.class));
+                HorizontalLayout AIChatLink = new HorizontalLayout(new Icon(VaadinIcon.CLUSTER),
+                                new RouterLink("Chat Bot AI", ChatWithAIView.class));
                 AIChatLink.addClassName("Chat-Link-Hz");
                 // Combine both links
                 VerticalLayout drawerContent = new VerticalLayout(chatLink, uploadLink, AIChatLink, avatarAndName);

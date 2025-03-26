@@ -1,11 +1,9 @@
 /* Global Reset for Consistency */
-* {
+.signup-view * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-
 
 /* Main Signup View Container */
 .signup-view {
@@ -32,18 +30,18 @@
 }
 
 /* Heading Styling */
-h1 {
+.signup-view h1 {
     color: #ffffff;
     font-size: 2rem; /* Consistent size, proportional */
     font-weight: 600;
-    letter-spacing: 0.8px; /* Slightly reduced for balance */
+    letter-spacing: 0.8px;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
     margin-bottom: 20px; /* Increased from 15px for spacing */
     animation: fadeIn 1s ease-in-out;
 }
 
 /* Container for Signup Form and Image */
-.container-class-signup-image {
+.signup-view .container-class-signup-image {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,7 +58,7 @@ h1 {
     animation: slideIn 0.6s ease-out;
 }
 
-
+/* Combo Box */
 vaadin-combo-box {
     width: 100%;
     margin: 10px 0;
@@ -71,13 +69,13 @@ vaadin-combo-box {
     transition: all 0.3s ease;
 }
 
-
-  vaadin-combo-box-overlay {
+/* Combo Box Overlay */
+vaadin-combo-box-overlay {
     z-index: 999 !important;
-  }
-      
+}
+
 /* Signup Form Layout */
-.container-class-signup-image > vaadin-vertical-layout {
+.signup-view .container-class-signup-image > vaadin-vertical-layout {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,11 +86,11 @@ vaadin-combo-box {
 }
 
 /* Input Fields (Email, Username, Password, Age, Gender) */
-vaadin-email-field,
-vaadin-text-field,
-vaadin-password-field,
-vaadin-integer-field,
-vaadin-combo-box {
+.signup-view vaadin-email-field,
+.signup-view vaadin-text-field,
+.signup-view vaadin-password-field,
+.signup-view vaadin-integer-field,
+.signup-view vaadin-combo-box {
     width: 100%;
     margin: 10px 0; /* Increased from 8px for spacing */
     background: rgba(40, 40, 40, 0.8);
@@ -102,11 +100,11 @@ vaadin-combo-box {
     transition: all 0.3s ease;
 }
 
-vaadin-email-field input,
-vaadin-text-field input,
-vaadin-password-field input,
-vaadin-integer-field input,
-vaadin-combo-box input {
+.signup-view vaadin-email-field input,
+.signup-view vaadin-text-field input,
+.signup-view vaadin-password-field input,
+.signup-view vaadin-integer-field input,
+.signup-view vaadin-combo-box input {
     color: #e0e0e0;
     font-size: 0.95rem; /* Slightly increased from 0.9rem for readability */
     background: transparent;
@@ -115,42 +113,42 @@ vaadin-combo-box input {
     width: 100%;
 }
 
-vaadin-email-field label,
-vaadin-text-field label,
-vaadin-password-field label,
-vaadin-integer-field label,
-vaadin-combo-box label {
+.signup-view vaadin-email-field label,
+.signup-view vaadin-text-field label,
+.signup-view vaadin-password-field label,
+.signup-view vaadin-integer-field label,
+.signup-view vaadin-combo-box label {
     color: #b0b0b0;
     font-size: 0.85rem; /* Slightly increased from 0.8rem for clarity */
     font-weight: 400;
     transition: color 0.3s ease;
 }
 
-vaadin-email-field:hover,
-vaadin-text-field:hover,
-vaadin-password-field:hover,
-vaadin-integer-field:hover,
-vaadin-combo-box:hover,
-vaadin-email-field:focus-within,
-vaadin-text-field:focus-within,
-vaadin-password-field:focus-within,
-vaadin-integer-field:focus-within,
-vaadin-combo-box:focus-within {
+.signup-view vaadin-email-field:hover,
+.signup-view vaadin-text-field:hover,
+.signup-view vaadin-password-field:hover,
+.signup-view vaadin-integer-field:hover,
+.signup-view vaadin-combo-box:hover,
+.signup-view vaadin-email-field:focus-within,
+.signup-view vaadin-text-field:focus-within,
+.signup-view vaadin-password-field:focus-within,
+.signup-view vaadin-integer-field:focus-within,
+.signup-view vaadin-combo-box:focus-within {
     background: rgba(50, 50, 50, 0.9);
     border-color: #26a69a;
     box-shadow: 0 0 10px rgba(38, 166, 154, 0.3);
 }
 
-vaadin-email-field:focus-within label,
-vaadin-text-field:focus-within label,
-vaadin-password-field:focus-within label,
-vaadin-integer-field:focus-within label,
-vaadin-combo-box:focus-within label {
+.signup-view vaadin-email-field:focus-within label,
+.signup-view vaadin-text-field:focus-within label,
+.signup-view vaadin-password-field:focus-within label,
+.signup-view vaadin-integer-field:focus-within label,
+.signup-view vaadin-combo-box:focus-within label {
     color: #26a69a;
 }
 
 /* Password Visibility Toggle */
-vaadin-password-field-button {
+.signup-view vaadin-password-field-button {
     color: #e0e0e0;
     background: transparent;
     border: none;
@@ -158,12 +156,12 @@ vaadin-password-field-button {
     transition: color 0.3s ease;
 }
 
-vaadin-password-field-button:hover {
+.signup-view vaadin-password-field-button:hover {
     color: #26a69a;
 }
 
 /* Signup Button */
-vaadin-button {
+.signup-view vaadin-button {
     width: 100%;
     margin: 15px 0 0 0; /* Reduced margin */
     padding: 30px 10px; /* Reduced padding */
@@ -180,14 +178,37 @@ vaadin-button {
     transition: all 0.3s ease;
 }
 
-vaadin-button:hover {
+.signup-view vaadin-button:hover {
     background: #2cb9ac;
     box-shadow: 0 6px 18px rgba(38, 166, 154, 0.5);
     transform: translateY(-1px);
 }
 
+/* Already Have Account Link */
+.signup-view .already_have_account {
+    width: 100%;
+    margin: 0; /* Reduced margin */
+    padding: 10px; /* Reduced padding */
+    border-radius: 8px;
+    font-size: 0.9rem; /* Reduced from 1rem */
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    background: transparent;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(38, 166, 154, 0.3);
+    transition: all 0.3s ease;
+}
+
+.signup-view .already_have_account:hover {
+    background: rgba(38, 166, 154, 0.2);
+    transform: translateY(-1px);
+}
+
 /* Signup Image Styling */
-.signup-image {
+.signup-view .signup-image {
     width: 50%; /* Equal to form width */
     height: 450px; /* Increased from 380px to match container height better */
     background-image: url("signup.svg");
@@ -199,7 +220,7 @@ vaadin-button:hover {
     overflow: hidden;
 }
 
-.signup-image::before {
+.signup-view .signup-image::before {
     content: '';
     position: absolute;
     top: 0;
@@ -210,40 +231,6 @@ vaadin-button:hover {
     opacity: 0.6;
     z-index: 1;
     animation: glowPulse 4s infinite ease-in-out;
-}
-
-.already_have_account{
-    width: 100%;
-    margin: 0; /* Reduced margin */
-    padding: 10px; /* Reduced padding */
-    border-radius: 8px;
-    font-size: 0.9rem; /* Reduced from 1rem */
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    background: transparent;
-    color: #ffffff;
-    border: none;
-    box-shadow: 0 4px 12px rgba(38, 166, 154, 0.3);
-    transition: all 0.3s ease;
-}
-
-.already_have_account:hover{
-    width: 100%;
-    margin: 0; /* Reduced margin */
-    padding: 10px; /* Reduced padding */
-    border-radius: 8px;
-    font-size: 0.9rem; /* Reduced from 1rem */
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    background: transparent;
-    color: #ffffff;
-    border: none;
-    box-shadow: 0 4px 12px rgba(38, 166, 154, 0.3);
-    transition: all 0.3s ease;
 }
 
 /* Animations */
@@ -263,26 +250,186 @@ vaadin-button:hover {
     100% { opacity: 0.4; }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container-class-signup-image {
+
+
+
+@media screen and (max-width: 740px) {
+    .signup-view {
+        padding: 15px;
+        height: auto; /* Allow content to expand */
+        min-height: 100vh; /* Ensure full screen if content is short */
+    }
+
+    .signup-view h1 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .signup-view .container-class-signup-image {
         flex-direction: column;
-        padding: 20px; /* Slightly increased from 15px */
-        max-width: 95%;
+        padding: 25px;
+        max-width: 90%; /* Slight margin on sides */
+        margin: 0 auto;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
 
-    .container-class-signup-image > vaadin-vertical-layout,
-    .signup-image {
+    .signup-view .container-class-signup-image > vaadin-vertical-layout {
         width: 100%;
-        max-width: none;
+        padding: 20px;
+        max-width: 340px; /* Slightly smaller form */
     }
 
-    .signup-image {
-        height: 250px; /* Consistent with login for mobile */
-        margin-bottom: 15px; /* Increased from 10px for spacing */
+    .signup-view .signup-image {
+        width: 100%;
+        height: 250px; /* Balanced height */
+        margin-top: 20px; /* Spacing above image */
+        border-radius: 10px;
     }
 
-    h1 {
-        font-size: 1.8rem; /* Matches mobile heading */
+    .signup-view vaadin-email-field,
+    .signup-view vaadin-text-field,
+    .signup-view vaadin-password-field,
+    .signup-view vaadin-integer-field,
+    .signup-view vaadin-combo-box {
+        margin: 8px 0; /* Tighter spacing */
+        padding: 7px;
+    }
+
+    .signup-view vaadin-email-field input,
+    .signup-view vaadin-text-field input,
+    .signup-view vaadin-password-field input,
+    .signup-view vaadin-integer-field input,
+    .signup-view vaadin-combo-box input {
+        font-size: 0.9rem; /* Slightly smaller text */
+    }
+
+    .signup-view vaadin-button {
+        padding: 20px 10px; /* Reduced padding */
+        margin: 12px 0 0 0;
+    }
+
+    .signup-view .already_have_account {
+        margin: 8px 0 0 0;
+        padding: 8px;
+    }
+}
+
+/* Combo Box Overlay */
+.signup-view vaadin-combo-box-overlay {
+    position: relative;
+    z-index: 999 !important;
+}
+
+
+@media screen and (max-width: 480px) {
+    .signup-view {
+        padding: 10px;
+    }
+
+
+    .signup-view .container-class-signup-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(30, 30, 30, 0.9);
+        border-radius: 15px;
+        padding: 35px 0px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        max-width: 400px;
+        width: 100%;
+        z-index: 999;
+        overflow: hidden;
+        animation: slideIn 0.6s ease-out;
+    }
+    .signup-view .signup-image {
+        display: none;
+    }
+
+
+
+    .signup-view vaadin-email-field,
+.signup-view vaadin-text-field,
+.signup-view vaadin-integer-field,
+.signup-view vaadin-combo-box {
+    width: 120px;
+    background: rgba(40, 40, 40, 0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+/* Signup Form Layout */
+.signup-view .container-class-signup-image > vaadin-vertical-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: none;
+}
+
+.inputs-container-signup{
+    padding: 30px;
+}
+
+    .signup-view h1 {
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+    }
+
+    .signup-view .container-class-signup-image {
+        padding: 20px;
+        max-width: 95%; /* Almost full width */
+        border-radius: 10px;
+    }
+
+    .signup-view .container-class-signup-image > vaadin-vertical-layout {
+        padding: 15px;
+        max-width: 300px; /* Adjusted for small screens */
+    }
+
+    .signup-view .signup-image {
+        height: 180px; /* More compact */
+    }
+
+    .signup-view vaadin-email-field,
+    .signup-view vaadin-text-field,
+    .signup-view vaadin-password-field,
+    .signup-view vaadin-integer-field,
+    .signup-view vaadin-combo-box {
+        margin: 0;
+        padding: 6px;
+    }
+
+    .signup-view vaadin-email-field input,
+    .signup-view vaadin-text-field input,
+    .signup-view vaadin-password-field input,
+    .signup-view vaadin-integer-field input,
+    .signup-view vaadin-combo-box input {
+        font-size: 0.85rem;
+    }
+
+    .signup-view vaadin-email-field label,
+    .signup-view vaadin-text-field label,
+    .signup-view vaadin-password-field label,
+    .signup-view vaadin-integer-field label,
+    .signup-view vaadin-combo-box label {
+        font-size: 0.8rem; /* Smaller labels */
+    }
+
+    .signup-view vaadin-button {
+        padding: 15px 10px;
+        margin: 10px 0 0 0;
+        font-size: 0.85rem;
+    }
+
+    .signup-view .already_have_account {
+        margin: 6px 0 0 0;
+        padding: 7px;
+        font-size: 0.85rem;
     }
 }

@@ -165,12 +165,12 @@ public class ChatAppView extends HorizontalLayout {
         messageInput.setPlaceholder("Type a message...");
         messageInput.setClearButtonVisible(true);
         messageInput.setWidthFull();
-        messageInput.addClassName("ai-chat-input");
+        messageInput.addClassName("chat-input");
 
         Button sendButton = new Button(new Icon(VaadinIcon.PAPERPLANE));
         sendButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         sendButton.addClickShortcut(com.vaadin.flow.component.Key.ENTER);
-        sendButton.addClassName("ai-chat-send-button");
+        sendButton.addClassName("chat-send-button");
 
         sendButton.addClickListener(e -> {
             String message = messageInput.getValue().trim();

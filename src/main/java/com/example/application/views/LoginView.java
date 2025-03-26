@@ -7,6 +7,7 @@ import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
@@ -59,7 +60,9 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
     private void login(String email, String password) {
         if (email.isEmpty() || password.isEmpty()) {
-            Notification.show("Please fill all the fields", 3000, Notification.Position.TOP_CENTER);
+            Notification.show("Please fill all the fields",
+                            3000, Notification.Position.TOP_CENTER)
+                            .addThemeVariants(NotificationVariant.LUMO_ERROR);
             return;
         }
 
@@ -85,23 +88,36 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
                     auth.setAuthenticated(true);
                     SecurityContextHolder.getContext().setAuthentication(auth);
                     System.out.println("Authentication set: " + SecurityContextHolder.getContext().getAuthentication().getName());
-                    Notification.show("Login successful!", 3000, Notification.Position.TOP_CENTER);
+                    Notification.show("Login successful!",
+                            3000, Notification.Position.TOP_CENTER)
+                            .addThemeVariants(NotificationVariant.LUMO_SUCCESS);
                     getUI().ifPresent(ui -> ui.navigate("chatAI"));
                 } else {
-                    Notification.show("Authentication failed: Unable to validate user", 3000, Notification.Position.TOP_CENTER);
+                    Notification.show("Authentication failed: Unable to validate user",
+                            3000, Notification.Position.TOP_CENTER)
+                            .addThemeVariants(NotificationVariant.LUMO_ERROR);
                 }
             } else {
-                Notification.show("Authentication failed: Invalid response from server", 3000, Notification.Position.TOP_CENTER);
+                Notification.show("Session Expired as Access Token Not Found",
+                            3000, Notification.Position.TOP_CENTER)
+                            .addThemeVariants(NotificationVariant.LUMO_ERROR);
             }
         } catch (Exception e) {
-            Notification.show("Authentication failed: " + e.getMessage(), 3000, Notification.Position.TOP_CENTER);
+            if (e.getMessage().contains("Invalid login credentials")) {
+                Notification.show("Authentication failed: Wrong Email/Password",
+                3000, Notification.Position.TOP_CENTER)
+                .addThemeVariants(NotificationVariant.LUMO_ERROR);
+            }
+            else{
+                Notification.show("Something went wrong!!", 3000, Notification.Position.TOP_CENTER).addThemeVariants(NotificationVariant.LUMO_ERROR);
+            }
         }
     }
 
     @Override
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
         if (beforeEnterEvent.getLocation().getQueryParameters().getParameters().containsKey("error")) {
-            Notification.show("Authentication error occurred", 3000, Notification.Position.TOP_CENTER);
+            Notification.show("Authentication error occurred", 3000, Notification.Position.TOP_CENTER).addThemeVariants(NotificationVariant.LUMO_ERROR);
         }
     }
 }

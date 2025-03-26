@@ -1,4 +1,4 @@
-/* Global Styles */
+/* Global Variables */
 :root {
   --primary-color: #6200ea;
   --primary-light: rgba(98, 0, 234, 0.1);
@@ -14,147 +14,159 @@
   --transition: all 0.3s ease;
 }
 
-/* File Upload View Styles */
+/* Scoped to .file-upload-view */
 .file-upload-view {
   background-color: var(--background-dark);
   color: var(--text-primary);
   font-family: "Roboto", "Segoe UI", Helvetica, Arial, sans-serif;
   min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto; /* Allow vertical scrolling */
 }
 
 /* Content Container */
-.content-container {
+.file-upload-view .content-container {
   animation: fadeIn 0.5s ease-in-out;
+  width: 100%;
+  max-width: 1200px; /* Limit width on larger screens */
+  overflow-y: auto; /* Allow vertical scrolling */
 }
 
+/* FadeIn Animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 /* Title Header */
-.title-header {
+.file-upload-view .title-header {
   font-size: 2.2rem;
   font-weight: 300;
-  margin: 0;
+  margin: 0 0 20px 0;
   color: var(--text-primary);
   text-align: center;
 }
 
 /* Upload Card */
-.upload-card {
+.file-upload-view .upload-card {
   background: linear-gradient(145deg, #1f1f1f, #2d2d2d);
   border-radius: var(--border-radius);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   transition: var(--transition);
   overflow: hidden;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px; /* Limit width on larger screens */
+  margin: 0 auto 20px auto;
 }
 
-.upload-card:hover {
+.file-upload-view .upload-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
 }
 
 /* Upload Container */
-.upload-container {
+.file-upload-view .upload-container {
   width: 100%;
   transition: var(--transition);
 }
 
 /* Upload Component Customization */
-vaadin-upload {
+.file-upload-view vaadin-upload {
   --lumo-primary-color: var(--primary-color);
   --lumo-primary-text-color: var(--primary-color);
   --lumo-error-color: var(--error-color);
   --lumo-success-color: var(--success-color);
+  width: 100%;
 }
 
-.upload-component, vaadin-upload::part(primary-buttons){
-    display: flex;
-    gap: 10px;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row ;
+.file-upload-view .upload-component,
+.file-upload-view vaadin-upload::part(primary-buttons) {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 
-vaadin-upload-file::part(row){
-    display: flex;
-    justify-content: center;
-    align-items: center;
-flex-direction: column;
+.file-upload-view vaadin-upload-file::part(row) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-vaadin-upload-file::part(info){
-    display: none;
+.file-upload-view vaadin-upload-file::part(info) {
+  display: none;
 }
 
-
-
-vaadin-upload::part(drop-label) {
+.file-upload-view vaadin-upload::part(drop-label) {
   color: var(--text-secondary);
   font-size: 1.2rem;
   font-weight: 300;
   width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-vaadin-upload::part(drop-label-icon) {
+.file-upload-view vaadin-upload::part(drop-label-icon) {
   color: var(--primary-color);
   width: 48px;
   height: 48px;
 }
 
-vaadin-upload:hover {
+.file-upload-view vaadin-upload:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Grid Card */
-.grid-card {
+.file-upload-view .grid-card {
   background: linear-gradient(145deg, #1f1f1f, #2d2d2d);
   border-radius: var(--border-radius);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   transition: var(--transition);
   overflow: hidden;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px; /* Match content-container */
+  margin: 0 auto;
 }
 
 /* File Grid */
-.file-grid {
+.file-upload-view .file-grid {
   --lumo-primary-color: var(--primary-color);
   --lumo-primary-text-color: var(--primary-color);
   --lumo-body-text-color: var(--text-primary);
   background: transparent;
+  width: 100%;
+  overflow-y: auto; /* Allow vertical scrolling */
 }
 
-
 /* Grid Row Hover */
-vaadin-grid::part(row):hover {
+.file-upload-view vaadin-grid::part(row):hover {
   background-color: rgba(98, 0, 234, 0.1);
 }
 
 /* Grid Cell */
-vaadin-grid::part(cell) {
+.file-upload-view vaadin-grid::part(cell) {
   padding: 12px 16px;
   background-color: rgba(25, 21, 30, 0.505);
 }
 
-/* Grid Row Hover */
-vaadin-grid::part(row):hover {
-    background-color: rgba(98, 0, 234, 0.1);
-  }
-
-  /* Grid Header */
-vaadin-grid::part(header-cell) {
-    background-color: rgba(255, 255, 255, 0.05);
-    font-weight: 600;
-    color: var(--accent-color);
-  }
+/* Grid Header */
+.file-upload-view vaadin-grid::part(header-cell) {
+  background-color: rgba(255, 255, 255, 0.05);
+  font-weight: 600;
+  color: var(--accent-color);
+}
 
 /* Button Styles */
-vaadin-button {
+.file-upload-view vaadin-button {
   border-radius: var(--border-radius);
   font-weight: 500;
   text-transform: uppercase;
@@ -163,71 +175,177 @@ vaadin-button {
   transition: var(--transition);
 }
 
-vaadin-button:hover {
+.file-upload-view vaadin-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Primary Button */
-vaadin-button[theme~="primary"] {
+.file-upload-view vaadin-button[theme~="primary"] {
   background-color: var(--primary-color);
 }
 
-vaadin-button[theme~="primary"]:hover {
+.file-upload-view vaadin-button[theme~="primary"]:hover {
   background-color: #7c4dff;
 }
 
 /* Error Button */
-vaadin-button[theme~="error"] {
+.file-upload-view vaadin-button[theme~="error"] {
   background-color: var(--error-color);
 }
 
-vaadin-button[theme~="error"]:hover {
+.file-upload-view vaadin-button[theme~="error"]:hover {
   background-color: #ff7676;
 }
 
 /* Icons in Buttons */
-vaadin-button iron-icon {
+.file-upload-view vaadin-button iron-icon {
   margin-right: 8px;
 }
 
 /* File Actions */
-.file-actions {
+.file-upload-view .file-actions {
   display: flex;
   gap: 8px;
   justify-content: flex-end;
 }
 
-/* Download Button */
-.download-link {
+/* Download Link */
+.file-upload-view .download-link {
   text-decoration: none;
 }
 
 /* Notification Styles */
-vaadin-notification-card {
+.file-upload-view vaadin-notification-card {
   border-radius: var(--border-radius);
-  /* padding: 16px; */
   width: fit-content;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* Responsive Adjustments */
-@media (max-width: 600px) {
-  .title-header {
-    font-size: 1.8rem;
+/* Section Title and Icon */
+.file-upload-view .section-title,
+.file-upload-view .section-icon {
+  margin-bottom: 20px;
+}
+
+/* Scrollbar Styles */
+.file-upload-view::-webkit-scrollbar {
+  width: 6px;
+}
+
+.file-upload-view::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.5);
+  border-radius: 10px;
+}
+
+.file-upload-view::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 120, 0.7);
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 740px) {
+  .file-upload-view {
+      padding: 10px;
   }
-  
-  .upload-card, .grid-card {
-    padding: 1rem;
+
+  .file-upload-view .title-header {
+      font-size: 1.8rem; /* Smaller title */
   }
-  
-  vaadin-grid::part(cell) {
-    padding: 8px 12px;
+
+  .file-upload-view .upload-card {
+      padding: 15px;
+      max-width: 100%; /* Full width on mobile */
+      margin-bottom: 15px;
+  }
+
+  .file-upload-view .upload-component,
+  .file-upload-view vaadin-upload::part(primary-buttons) {
+      flex-direction: column; /* Stack buttons vertically */
+      gap: 8px;
+  }
+
+  .file-upload-view vaadin-upload::part(drop-label) {
+      font-size: 1rem; /* Smaller text */
+  }
+
+  .file-upload-view vaadin-upload::part(drop-label-icon) {
+      width: 36px;
+      height: 36px; /* Smaller icon */
+  }
+
+  .file-upload-view .grid-card {
+      padding: 15px;
+      max-width: 100%; /* Full width on mobile */
+  }
+
+  .file-upload-view vaadin-grid::part(cell) {
+      padding: 8px 12px; /* Reduced padding */
+      font-size: 0.9rem; /* Smaller text */
+  }
+
+  .file-upload-view vaadin-grid::part(header-cell) {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+  }
+
+  .file-upload-view .file-actions {
+      flex-direction: column; /* Stack actions vertically */
+      gap: 6px;
+      margin-top: 10px; /* Move actions down */
+  }
+
+  .file-upload-view vaadin-button {
+      padding: 8px 12px; /* Adjusted padding */
+      font-size: 0.9rem; /* Smaller text */
   }
 }
 
+@media screen and (max-width: 480px) {
+  .file-upload-view {
+      padding: 5px;
+  }
 
-.section-title, .section-icon{
-    margin-bottom: 20px;
+  .file-upload-view .title-header {
+      font-size: 1.5rem;
+  }
+
+  .file-upload-view .upload-card {
+      padding: 10px;
+  }
+
+  .file-upload-view vaadin-upload::part(drop-label) {
+      font-size: 0.9rem;
+  }
+
+  .file-upload-view vaadin-upload::part(drop-label-icon) {
+      width: 32px;
+      height: 32px;
+  }
+
+  .file-upload-view vaadin-grid vaadin-grid-cell-content {
+      width: fit-content;
+  }
+
+  .file-upload-view vaadin-grid::part(cell) {
+      padding: 6px 10px;
+      width: 150px;
+      font-size: 0.85rem;
+  }
+
+  .file-upload-view vaadin-grid::part(header-cell) {
+      padding: 6px 10px;
+      font-size: 0.85rem;
+  }
+
+  .file-upload-view vaadin-button {
+      padding: 6px 10px;
+      font-size: 0.85rem;
+  }
+
+  .file-upload-view .file-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: flex-end;
+  }
 }
-

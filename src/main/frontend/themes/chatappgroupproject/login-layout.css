@@ -1,10 +1,16 @@
-/* Global Reset for Consistency */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Scoped to .login-view only */
+.login-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: none; /* Let body background show */
+    padding: 20px;
+    position: relative;
+    box-sizing: border-box; /* Ensure padding doesn’t overflow */
 }
-
 
 .login-view::before {
     content: '';
@@ -17,20 +23,9 @@
     opacity: 0.9;
     z-index: 1;
 }
-/* Main Login View Container */
-.login-view {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    background: none; /* Let body background show */
-    padding: 20px;
-}
 
 /* Heading Styling */
-h1 {
+.login-view h1 {
     color: #ffffff;
     font-size: 2.5rem;
     font-weight: 600;
@@ -38,14 +33,15 @@ h1 {
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
     margin-bottom: 25px;
     animation: fadeIn 1s ease-in-out;
+    z-index: 999;
 }
 
 /* Container for Login Form and Image */
-.container-class-login-image {
+.login-view .container-class-login-image {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(30, 30, 30, 0.9); /* Darker translucent background */
+    background: rgba(30, 30, 30, 0.9);
     border-radius: 15px;
     padding: 35px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
@@ -59,7 +55,7 @@ h1 {
 }
 
 /* Login Form Layout */
-.container-class-login-image > vaadin-vertical-layout {
+.login-view .container-class-login-image > vaadin-vertical-layout {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -69,20 +65,20 @@ h1 {
 }
 
 /* Input Fields (Email and Password) */
-vaadin-email-field,
-vaadin-password-field {
+.login-view vaadin-email-field,
+.login-view vaadin-password-field {
     width: 100%;
     margin: 12px 0;
-    background: rgba(40, 40, 40, 0.8); /* Darker field background */
+    background: rgba(40, 40, 40, 0.8);
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 8px;
     transition: all 0.3s ease;
 }
 
-vaadin-email-field input,
-vaadin-password-field input {
-    color: #e0e0e0; /* Light text */
+.login-view vaadin-email-field input,
+.login-view vaadin-password-field input {
+    color: #e0e0e0;
     font-size: 1rem;
     background: transparent;
     border: none;
@@ -90,30 +86,30 @@ vaadin-password-field input {
     width: 100%;
 }
 
-vaadin-email-field label,
-vaadin-password-field label {
-    color: #b0b0b0; /* Subtle gray for labels */
+.login-view vaadin-email-field label,
+.login-view vaadin-password-field label {
+    color: #b0b0b0;
     font-size: 0.9rem;
     font-weight: 400;
     transition: color 0.3s ease;
 }
 
-vaadin-email-field:hover,
-vaadin-password-field:hover,
-vaadin-email-field:focus-within,
-vaadin-password-field:focus-within {
+.login-view vaadin-email-field:hover,
+.login-view vaadin-password-field:hover,
+.login-view vaadin-email-field:focus-within,
+.login-view vaadin-password-field:focus-within {
     background: rgba(50, 50, 50, 0.9);
-    border-color: #26a69a; /* Teal accent */
+    border-color: #26a69a;
     box-shadow: 0 0 10px rgba(38, 166, 154, 0.3);
 }
 
-vaadin-email-field:focus-within label,
-vaadin-password-field:focus-within label {
-    color: #26a69a; /* Teal on focus */
+.login-view vaadin-email-field:focus-within label,
+.login-view vaadin-password-field:focus-within label {
+    color: #26a69a;
 }
 
 /* Password Visibility Toggle */
-vaadin-password-field-button {
+.login-view vaadin-password-field-button {
     color: #e0e0e0;
     background: transparent;
     border: none;
@@ -121,13 +117,13 @@ vaadin-password-field-button {
     transition: color 0.3s ease;
 }
 
-vaadin-password-field-button:hover {
+.login-view vaadin-password-field-button:hover {
     color: #26a69a;
 }
 
 /* Buttons (Login and Sign Up) */
-vaadin-button {
-    border-radius: 8px; /* Sleeker, less rounded */
+.login-view vaadin-button {
+    border-radius: 8px;
     font-size: 1rem;
     font-weight: 500;
     text-transform: uppercase;
@@ -137,8 +133,8 @@ vaadin-button {
 }
 
 /* Login Button */
-vaadin-button:first-of-type {
-    background: #26a69a; /* Teal primary color */
+.login-view vaadin-button:first-of-type {
+    background: #26a69a;
     color: #ffffff;
     border: none;
     width: 100%;
@@ -147,50 +143,30 @@ vaadin-button:first-of-type {
     box-shadow: 0 4px 12px rgba(38, 166, 154, 0.3);
 }
 
-vaadin-button:first-of-type:hover {
-    background: #2cb9ac; /* Slightly lighter teal */
+.login-view vaadin-button:first-of-type:hover {
+    background: #2cb9ac;
     box-shadow: 0 6px 18px rgba(38, 166, 154, 0.5);
     transform: translateY(-1px);
 }
 
 /* Sign Up Button */
-vaadin-button:last-of-type {
+.login-view vaadin-button:last-of-type {
     width: fit-content;
-    margin: 0 auto; /* Reduced margin */
-    padding: 10px 20px; /* Reduced padding */
-    border-radius: 8px;
-    font-size: 0.9rem; /* Reduced from 1rem */
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    cursor: pointer;
+    margin: 0 auto;
+    padding: 10px 20px;
     background: transparent;
     color: #ffffff;
     border: none;
     box-shadow: 0 4px 12px rgba(38, 166, 154, 0.3);
-    transition: all 0.3s ease;
 }
 
-vaadin-button:last-of-type:hover {
-    width: 100%;
-    margin: 0; /* Reduced margin */
-    padding: 10px; /* Reduced padding */
-    border-radius: 8px;
-    font-size: 0.9rem; /* Reduced from 1rem */
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    background: transparent;
-    color: #ffffff;
-    border: none;
-    box-shadow: 0 4px 12px rgba(38, 166, 154, 0.3);
-    transition: all 0.3s ease;
+.login-view vaadin-button:last-of-type:hover {
+    background: rgba(38, 166, 154, 0.2);
     transform: translateY(-1px);
 }
 
 /* Login Image Styling */
-.login-image {
+.login-view .login-image {
     width: 50%;
     height: 450px;
     background-image: url("login.svg");
@@ -202,14 +178,14 @@ vaadin-button:last-of-type:hover {
     overflow: hidden;
 }
 
-.login-image::before {
+.login-view .login-image::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(38, 166, 154, 0.1); /* Subtle teal overlay */
+    background: rgba(38, 166, 154, 0.1);
     opacity: 0.6;
     z-index: 1;
     animation: glowPulse 4s infinite ease-in-out;
@@ -232,26 +208,140 @@ vaadin-button:last-of-type:hover {
     100% { opacity: 0.4; }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container-class-login-image {
-        flex-direction: column;
-        padding: 20px;
-        max-width: 95%;
+/* Mobile Responsiveness */
+@media screen and (max-width: 740px) {
+    .login-view {
+        padding: 15px; /* Slightly more padding for balance */
+        height: auto; /* Allow height to expand */
+        min-height: 100vh; /* Ensure it fills screen if content is short */
     }
 
-    .container-class-login-image > vaadin-vertical-layout,
-    .login-image {
+    .login-view h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .login-view .container-class-login-image {
+        flex-direction: column; /* Stack vertically */
+        padding: 25px; /* Slightly reduced but balanced */
+        max-width: 90%; /* Slightly less than full width for margins */
+        margin: 0 auto;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Adjusted shadow */
+    }
+
+    .login-view .container-class-login-image > vaadin-vertical-layout {
         width: 100%;
-        max-width: none;
+        max-width: 340px; /* Slightly smaller max-width */
+        padding: 20px;
     }
 
-    .login-image {
-        height: 250px;
+    .login-view .login-image {
+        width: 100%;
+        height: 250px; /* Balanced height */
+        margin-top: 20px; /* Increased spacing */
+        border-radius: 10px;
+    }
+
+    .login-view vaadin-email-field,
+    .login-view vaadin-password-field {
+        margin: 10px 0;
+        padding: 7px;
+    }
+
+    .login-view vaadin-email-field input,
+    .login-view vaadin-password-field input {
+        font-size: 0.95rem; /* Slightly smaller text */
+    }
+
+    .login-view vaadin-button:first-of-type {
+        padding: 20px; /* Reduced but still prominent */
+        margin: 15px 0 0 0;
+    }
+
+    .login-view vaadin-button:last-of-type {
+        padding: 8px 18px;
+        margin-top: 10px; /* Added spacing */
+    }
+
+
+    .login-view .login-image {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .login-view {
+        padding: 10px;
+    }
+
+    .login-view h1 {
+        font-size: 1.75rem; /* More gradual reduction */
+        margin-bottom: 15px;
+    }
+
+    .login-view .container-class-login-image {
+        padding: 20px;
+        max-width: 95%; /* Almost full width */
+        border-radius: 10px;
+    }
+
+    .login-view .container-class-login-image > vaadin-vertical-layout {
+        padding: 15px;
+        max-width: 300px; /* Adjusted for small screens */
+    }
+
+    .login-view .login-image {
+        height: 180px; /* More compact */
         margin-top: 15px;
     }
 
-    h1 {
-        font-size: 2rem;
+    .login-view vaadin-email-field,
+    .login-view vaadin-password-field {
+        margin: 8px 0;
+        padding: 6px;
+    }
+
+    .login-view vaadin-email-field input,
+    .login-view vaadin-password-field input {
+        font-size: 0.9rem;
+    }
+
+    .login-view vaadin-email-field label,
+    .login-view vaadin-password-field label {
+        font-size: 0.85rem; /* Smaller labels */
+    }
+
+    .login-view vaadin-button:first-of-type {
+        padding: 15px;
+        margin: 12px 0 0 0;
+        font-size: 0.95rem;
+    }
+
+    .login-view vaadin-button:last-of-type {
+        padding: 7px 16px;
+        font-size: 0.9rem;
+        margin-top: 8px;
+    }
+    
+    .login-view .login-image {
+        display: none;
+    }
+}
+
+/* Ensure desktop layout remains unchanged above 740px */
+@media screen and (min-width: 741px) {
+    .login-view .container-class-login-image {
+        flex-direction: row; /* Explicitly enforce side-by-side */
+    }
+
+    .login-view .container-class-login-image > vaadin-vertical-layout {
+        width: 50%;
+        max-width: 380px;
+    }
+
+    .login-view .login-image {
+        width: 50%;
+        height: 450px;
     }
 }
