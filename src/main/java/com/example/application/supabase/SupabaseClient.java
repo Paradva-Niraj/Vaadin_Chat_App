@@ -15,6 +15,9 @@ public class SupabaseClient {
   @Value("${supabase.apiKey}") // Inject from application.properties
   private String apiKey;
 
+  @Value("${supabase.jwt.secret}")
+  private String authSecret;
+  
   public SupabaseClient(WebClient.Builder webClientBuilder) {
     this.webClient = webClientBuilder.build();
   }

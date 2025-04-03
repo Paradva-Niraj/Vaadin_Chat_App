@@ -78,6 +78,10 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
                     String username = userNode.has("user_metadata") && userNode.get("user_metadata").has("username") 
                         ? userNode.get("user_metadata").get("username").asText() 
                         : email;
+                        // ✅ Store username in VaadinSession
+                    VaadinSession.getCurrent().setAttribute("username", username);
+                    System.out.println("Username set in session: " + username);
+
                     UserDetails userDetails = User.builder()
                         .username(username)
                         .password("")

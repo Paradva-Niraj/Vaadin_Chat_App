@@ -1,0 +1,7 @@
+.chat-header {
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
