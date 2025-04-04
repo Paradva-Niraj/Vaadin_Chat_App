@@ -17,10 +17,13 @@ import com.vaadin.flow.theme.lumo.LumoUtility;
 import com.vaadin.flow.theme.lumo.LumoUtility.Width;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.example.application.views.PrivateChatView;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MainLayout extends AppLayout {
         private final SecurityService securityService;
 
+        @Autowired
         public MainLayout(SecurityService securityService) {
                 this.securityService = securityService;
                 createHeader();
@@ -69,6 +72,11 @@ public class MainLayout extends AppLayout {
                                 new RouterLink("Group Chat", ChatAppView.class));
                 chatLink.addClassName("Chat-Link-Hz");
 
+                // Private Chat Link
+                HorizontalLayout privateChatLink = new HorizontalLayout(new Icon(VaadinIcon.USERS),
+                        new RouterLink("Private Chat", PrivateChatView.class));
+                privateChatLink.addClassName("Chat-Link-Hz");
+
                 // File Upload Link
                 HorizontalLayout uploadLink = new HorizontalLayout(new Icon(VaadinIcon.CLOUD_UPLOAD_O),
                                 new RouterLink("File Upload", FileUploadView.class));
@@ -79,7 +87,7 @@ public class MainLayout extends AppLayout {
                                 new RouterLink("Chat Bot AI", ChatWithAIView.class));
                 AIChatLink.addClassName("Chat-Link-Hz");
                 // Combine both links
-                VerticalLayout drawerContent = new VerticalLayout(chatLink, uploadLink, AIChatLink, avatarAndName);
+                VerticalLayout drawerContent = new VerticalLayout(chatLink,privateChatLink, uploadLink, AIChatLink, avatarAndName);
                 drawerContent.addClassName("linkUsernameLogout");
                 drawerContent.setSpacing(false); // Prevent spacing between the navigation and logout
                 drawerContent.setSizeFull(); // Ensure it fills the available space
