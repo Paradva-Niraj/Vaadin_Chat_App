@@ -20,6 +20,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.example.application.views.PrivateChatView;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@SuppressWarnings("unused")
 public class MainLayout extends AppLayout {
         private final SecurityService securityService;
 
@@ -73,7 +74,7 @@ public class MainLayout extends AppLayout {
                 chatLink.addClassName("Chat-Link-Hz");
 
                 // Private Chat Link
-                HorizontalLayout privateChatLink = new HorizontalLayout(new Icon(VaadinIcon.USERS),
+                HorizontalLayout privateChatLink = new HorizontalLayout(new Icon(VaadinIcon.USER),
                         new RouterLink("Private Chat", PrivateChatView.class));
                 privateChatLink.addClassName("Chat-Link-Hz");
 

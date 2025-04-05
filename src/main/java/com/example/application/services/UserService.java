@@ -1,11 +1,9 @@
 package com.example.application.services;
 
 import com.example.application.supabase.SupabaseClient;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import java.util.ArrayList;
@@ -15,6 +13,7 @@ import java.util.Map;
 @Service
 public class UserService {
     private final SupabaseClient supabaseClient;
+    @SuppressWarnings("unused")
     private final ObjectMapper objectMapper;
 
     @Autowired
