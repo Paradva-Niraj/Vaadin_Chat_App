@@ -16,6 +16,10 @@
   </tr>
   <tr>
     <td><img src="./livedemoimages/5.png" width="100%" /></td>
+    <td><img src="./livedemoimages/6.png" width="100%" /></td>
+  </tr>
+   <tr>
+    <td><img src="./livedemoimages/7.png" width="100%" /></td>
   </tr>
 </table>
 
@@ -26,6 +30,7 @@
     <td><img src="./livedemoimages/m3.png" width="100%" /></td>
     <td><img src="./livedemoimages/m4.png" width="100%" /></td>
     <td><img src="./livedemoimages/m5.png" width="100%" /></td>
+    <td><img src="./livedemoimages/m6.png" width="100%" /></td>
   </tr>
 </table>
 
