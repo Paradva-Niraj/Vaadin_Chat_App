@@ -1,0 +1,712 @@
+/* Enhanced Dark Theme Palette */
+:root {
+  --dark-bg: #0A0F14; /* Deep, rich dark background */
+  --chat-bg: #121212; /* Slightly lighter chat area */
+  --accent-green: #007cc4; /* Vibrant teal-green accent */
+  --hover-green: #0095e5; /* Brighter hover effect */
+  --user-bubble: #1b6499; /* Teal for sent messages */
+  --receiver-bubble: #2A3942; /* Dark gray for received messages */
+  --text-primary: #F0F2F5; /* Crisp white text */
+  --text-secondary: #A0B1BB; /* Soft gray for secondary text */
+  --border: #2D3A45; /* Subtle dark border */
+  --shadow: rgba(0, 0, 0, 0.4); /* Deep shadow */
+  --radius-md: 10px; /* Softer, modern corners */
+  --transition-speed: 0.3s; /* Smooth transitions */
+}
+
+/* Main container */
+.private-chat-view {
+  background: #121212; /* Gradient for depth */
+  color: var(--text-primary);
+  padding: 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  box-shadow: inset 0 0 30px var(--shadow); /* Subtle inner glow */
+}
+
+/* Chat content wrapper */
+.private-chat-content {
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  overflow: hidden;
+  background: var(--chat-bg);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 20px var(--shadow);
+}
+
+/* Chat header */
+.private-chat-header {
+  background: #121212; /* Dark gradient matching theme */
+  padding: 20px 25px;
+  z-index: 10;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px var(--shadow);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.private-chat-header vaadin-avatar {
+  margin-right: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  width: 45px;
+  height: 45px;
+  color: white;
+  background-color: var(--user-bubble);
+  box-shadow: 0 2px 10px var(--shadow);
+  transition: transform var(--transition-speed) ease;
+}
+
+.private-chat-header vaadin-avatar:hover {
+  transform: scale(1.1);
+}
+
+.private-chat-header span {
+  font-size: 1.5rem; /* Larger, bolder title */
+  font-weight: 700;
+  color: var(--text-primary);
+  text-shadow: 0 2px 6px var(--shadow); /* Enhanced shadow for depth */
+  letter-spacing: 0.5px;
+}
+
+/* User list (sidebar) */
+.private-user-list {
+  background: #121212; /* Subtle dark gradient */
+  width: 18rem!important;
+  /* min-width: 150px; */
+  border-left: 7px double #2a2828;
+  overflow-y: auto;
+  overflow-x: hidden!important;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  border-right: 2px solid var(--border);
+  box-shadow: 0 10px 40px var(--shadow);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0; /* Rounded right edges */
+}
+
+.private-user-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.private-user-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, var(--border), #3A4456);
+  border-radius: 4px;
+}
+
+.private-user-list::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-green);
+}
+
+.private-user-list vaadin-grid {
+  border: none;
+  background: #121212
+}
+
+/* Header styling */
+.private-user-list vaadin-grid-cell-content[slot="vaadin-grid-cell-content-0"] {
+  padding: 15px 20px;
+  background: none;
+  background: #121212;
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  font-weight: 600;
+  width: 100%;
+  display: flex;
+  margin:10px;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px var(--shadow);
+  border: none;
+  box-shadow: none;
+}
+
+.shadow-usersListsHeader {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shadow-usersListsHeader vaadin-icon {
+  width: 40px;
+  margin-bottom: 5px;
+}
+
+/* Individual user items */
+.private-user-list vaadin-grid-cell-content {
+  color: #bdbdbd; /* Soft, readable gray for dark themes */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: flex-start;
+  padding: 1rem 1.75rem;
+  margin: 0.05rem;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(40, 40, 40, 0.7), rgba(30, 30, 30, 0.7)); /* Deeper dark gradient */
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4), /* Subtle shadow for depth */
+              -1px -1px 4px rgba(50, 50, 50, 0.1);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 400; /* Lighter font weight for a more subtle look */
+}
+
+vaadin-grid::part(cell) {
+  padding: 0px 10px;
+}
+
+vaadin-grid::part(header-cell) {
+  background: #121212;
+  border-bottom: 7px double #2a2828;
+}
+
+vaadin-grid::part(body-cell) {
+  margin-top: 10px;
+  background-color: #121212;
+}
+
+/* Hover effect with spark */
+.private-user-list vaadin-grid-cell-content:hover {
+  background: linear-gradient(90deg, rgba(24, 34, 41, 0.8), rgba(30, 40, 48, 0.8));
+  transform: scale(-20px);
+  box-shadow: 0 6px 20px var(--shadow);
+  color: var(--hover-green); /* Teal text on hover */
+}
+
+/* Selected state */
+.private-user-list vaadin-grid::part(body-cell)[selected] {
+  background: linear-gradient(90deg, rgba(27, 153, 138, 0.97), transparent);
+  font-weight: 600;
+  border-left: 4px solid var(--accent-green);
+  color: var(--text-primary);
+  box-shadow: inset 0 0 15px rgb(0, 255, 234); /* Inner glow */
+}
+
+vaadin-grid::part(row) {
+  background-color: #121212;
+}
+
+/* User item container */
+.private-user-list .user-item {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  letter-spacing: 1.3px;
+  position: relative;
+  transition: all var(--transition-speed) ease;
+}
+
+/* Avatar styling */
+.private-user-list .user-avatar {
+  width: 45px;
+  height: 45px;
+  color: #121212;
+  background-color: rgba(255, 255, 255, 0.539);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: transform var(--transition-speed) ease;
+}
+
+.private-user-list vaadin-grid-cell-content:hover .user-avatar {
+  transform: scale(1.1); /* Spark effect on hover */
+  border-color: var(--accent-green);
+}
+
+/* Username styling */
+.private-user-list .user-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-shadow: 0 1px 2px var(--shadow);
+}
+
+/* Unread badge */
+.private-user-list .unread-badge {
+  background-color: var(--accent-green); /* Vibrant teal instead of error color */
+  color: var(--text-primary);
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 0.9em;
+  font-weight: 600;
+  box-shadow: 0 2px 6px var(--shadow);
+  animation: pulse 1.5s infinite; /* Subtle pulse for spark */
+}
+
+/* Pulse animation for unread badge */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 2px 6px var(--shadow);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 196, 180, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 2px 6px var(--shadow);
+  }
+}
+
+/* Message bubble */
+.private-message-bubble {
+  position: relative;
+  max-width: 100%;
+  transition: all var(--transition-speed) ease;
+}
+
+/* User (sent) message */
+.private-user-message {
+  background: linear-gradient(145deg, var(--user-bubble), #1a4982); /* Dark teal gradient */
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  margin-left: auto;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px var(--shadow);
+  position: relative;
+  animation: slideInRight 0.3s ease-out;
+}
+
+/* Receiver (received) message */
+.private-receiver-message {
+  background: linear-gradient(145deg, var(--receiver-bubble), #33444E); /* Dark gray gradient */
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  margin-left: 10px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px var(--shadow);
+  position: relative;
+  animation: slideInLeft 0.3s ease-out;
+}
+
+/* Message timestamp and status */
+.message-timestamp {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  width: 100%;
+  margin-left: -13px;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  text-align: right;
+}
+
+.private-user-message .message-timestamp {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.private-receiver-message .message-timestamp {
+  color: var(--text-secondary);
+}
+
+.message-status-icon {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: 6px;
+}
+
+/* Chat container */
+.private-chat-container {
+  width: 100%;
+  background: var(--chat-bg);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.private-chat-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.private-chat-container::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.private-chat-container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-green);
+}
+
+/* Input area */
+.private-input-layout {
+  background: linear-gradient(145deg, var(--chat-bg), #1E2A32); /* Dark cohesive gradient */
+  padding: 15px 60px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-top: 2px solid var(--border);
+  box-shadow: 0 -4px 15px var(--shadow);
+}
+
+/* Input field (unchanged) */
+.private-message-input {
+  width: 100%;
+  --lumo-contrast-10pct: rgba(255, 255, 255, 0.05);
+  --lumo-contrast-20pct: rgba(255, 255, 255, 0.1);
+}
+
+.private-message-input::part(input-field) {
+  background: rgba(18, 22, 31, 0.6); /* Dark input background */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 12px 10px;
+  color: #E6E8EB;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: none;
+}
+
+.private-message-input:focus-within::part(input-field),
+.private-message-input:hover::part(input-field) {
+  background: rgba(50, 50, 60, 0.9);
+  border-color: #2673a6;
+  box-shadow: 0 0 10px rgba(38, 166, 154, 0.3);
+}
+
+.private-message-input::part(input-field)::placeholder {
+  color: rgba(180, 180, 180, 0.7);
+}
+
+.private-message-input > input {
+  color: #E6E8EB;
+}
+
+.private-message-input > input::placeholder {
+  opacity: 0.5;
+}
+
+/* Send button (unchanged) */
+.private-send-button {
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #2642a668;
+  border: 2px solid #2673a6;
+  color: #ffffff;
+  width: fit-content;
+  margin: 0;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(38, 166, 154, 0.3);
+}
+
+.private-send-button:hover {
+  background: #2642a68b;
+  border: 2px solid #2673a6;
+}
+
+/* Message content */
+.private-inner-message-content {
+  word-break: break-word;
+  white-space: pre-wrap;
+  padding: 4px 14px;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* Message status */
+.message-status {
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  margin-left: 6px;
+}
+
+/* Message layout */
+.message-layout {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+}
+
+.message-read-status {
+  position: absolute;
+  bottom: 13px;
+  right: 4px;
+}
+
+/* Animations */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 768px) {
+  .private-chat-view {
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .private-chat-content {
+    flex-direction: column;
+    max-width: 100%;
+    height: 100%;
+  }
+
+  .private-user-list {
+    width: 100% !important;
+    height: 25vh; /* Reduced from 30vh to 25vh */
+    border-right: none;
+    border-bottom: 2px solid var(--border);
+    min-width: auto;
+    overflow-y: auto;
+  }
+
+  /* Make user list items more compact on mobile */
+  .private-user-list vaadin-grid-cell-content {
+    padding: 0.5rem 1rem;
+    gap: 8px;
+  }
+
+  .private-user-list .user-avatar {
+    width: 35px;
+    height: 35px;
+  }
+
+  .private-user-list .user-name {
+    font-size: 0.9rem;
+  }
+
+  /* Header in mobile view */
+  .private-user-list vaadin-grid-cell-content[slot="vaadin-grid-cell-content-0"] {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .shadow-usersListsHeader vaadin-icon {
+    width: 30px;
+  }
+
+  .private-chat-container {
+    width: 100%;
+    height: 60vh; /* Increased from 70vh to balance with smaller user list */
+    flex-grow: 1;
+  }
+
+  .private-input-layout {
+    padding: 10px 15px;
+    gap: 8px;
+  }
+
+  .private-message-input::part(input-field) {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .private-send-button {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .private-chat-header {
+    padding: 12px 15px;
+  }
+
+  .private-chat-header vaadin-avatar {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+  }
+
+  .private-chat-header span {
+    font-size: 1.2rem;
+  }
+
+  .private-message-bubble {
+    max-width: 80%;
+    margin: 8px 10px;
+  }
+
+  .private-inner-message-content {
+    padding: 4px 10px;
+    font-size: 1rem;
+  }
+
+  /* Make sure sidebar doesn't take too much space */
+  .private-user-list vaadin-grid {
+    max-height: 25vh;
+  }
+}
+
+/* Small phone screens */
+@media (max-width: 480px) {
+  .private-chat-view {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .private-user-list {
+    background: #121212; /* Subtle dark gradient */
+    width: 100%;
+    /* min-width: 150px; */
+    border-left: none;
+    overflow-y: auto;
+    border-radius: 0px;
+    overflow-x: hidden!important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .private-user-list vaadin-grid {
+    border: none;
+    background: #121212
+  }
+
+  /* Header styling */
+  .private-user-list vaadin-grid-cell-content[slot="vaadin-grid-cell-content-0"] {
+    padding: 0px;
+    background: #121212;
+    color: var(--text-primary);
+    font-size:1rem;
+    font-weight: 600;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px var(--shadow);
+    border: none;
+    box-shadow: none;
+  }
+  
+  .shadow-usersListsHeader {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .shadow-usersListsHeader vaadin-icon {
+    width: 30px;
+  }
+  
+  /* Individual user items */
+  .private-user-list vaadin-grid-cell-content {
+    color: #bdbdbd; /* Soft, readable gray for dark themes */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 0px!important;
+    background: #121212; /* Deeper dark gradient */
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4), /* Subtle shadow for depth */
+                -1px -1px 4px rgba(50, 50, 50, 0.1);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 400; /* Lighter font weight for a more subtle look */
+  }
+  
+  vaadin-grid::part(cell) {
+    padding: 0px 0px;
+  }
+  
+  vaadin-grid::part(header-cell) {
+    background: #121212;
+    border-bottom: 7px double #2a2828;
+  }
+  
+  vaadin-grid::part(body-cell) {
+    margin-top: -2px;
+    background-color: #121212;
+  }
+
+  .private-user-list {
+    height: 22vh; /* Even smaller for very small screens */
+  }
+
+  .private-chat-container {
+    height: 65vh; /* More chat space */
+  }
+
+  .private-input-layout {
+    padding: 0px;
+  }
+
+ /* Send button (unchanged) */
+.private-send-button {
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #2642a668;
+  border: 2px solid #2673a6;
+  color: #ffffff;
+  width: fit-content;
+  margin-top: 5px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(38, 166, 154, 0.3);
+}
+
+.private-send-button:hover {
+  background: #2642a68b;
+}
+
+  .private-message-bubble {
+    width: 100%;
+    margin: 6px 0px;
+  }
+
+  /* Further compact user list */
+  .private-user-list vaadin-grid-cell-content {
+    padding: 0.4rem 0.8rem;
+  }
+
+  .private-user-list .user-avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .private-user-message {
+    background: linear-gradient(145deg, var(--user-bubble), #1a4982); /* Dark teal gradient */
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    margin-right: -42px;
+    padding: 12px 10px;
+    box-shadow: 0 4px 12px var(--shadow);
+    position: relative;
+    animation: slideInRight 0.3s ease-out;
+  }
+  
+
+}

@@ -5,7 +5,9 @@ import com.example.application.services.ChatMessageService;
 import com.example.application.services.UserService;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Aside;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
@@ -24,6 +26,10 @@ import java.util.Map;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.shared.Registration;
+import com.vaadin.flow.theme.lumo.LumoUtility.Background;
+import com.vaadin.flow.theme.lumo.LumoUtility.Display;
+import com.vaadin.flow.theme.lumo.LumoUtility.Flex;
+import com.vaadin.flow.theme.lumo.LumoUtility.FlexDirection;
 import com.vaadin.flow.component.DetachEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,16 +38,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 @AnonymousAllowed
 @CssImport("./themes/chatappgroupproject/private-chat.css")
 public class PrivateChatView extends HorizontalLayout {
-
-    private final VerticalLayout userListLayout = new VerticalLayout();
+    private final Aside userListAsideLayout = new Aside();
     private final VerticalLayout chatContainer = new VerticalLayout();
     private final VerticalLayout messageContainer = new VerticalLayout();
     private final HorizontalLayout chatHeader = new HorizontalLayout();
     private final TextField messageField = new TextField();
     private final Button sendButton = new Button(new Icon(VaadinIcon.PAPERPLANE));
-
+    private final HorizontalLayout inputArea = new HorizontalLayout();
     private final Map<String, List<ChatMessageService.ChatMessage>> userMessages = new HashMap<>();
- private final Map<String, Integer> unreadCounts = new HashMap<>();
+    private final Map<String, Integer> unreadCounts = new HashMap<>();
     private final Grid<User> userGrid = new Grid<>(User.class);
     private String currentRecipient;
 
@@ -51,7 +56,8 @@ public class PrivateChatView extends HorizontalLayout {
     private Registration messageRegistration;
 
     @Autowired
-    public PrivateChatView(UserService userService, ChatMessageService chatMessageService, SecurityService securityService) {
+    public PrivateChatView(UserService userService, ChatMessageService chatMessageService,
+            SecurityService securityService) {
         this.userService = userService;
         this.chatMessageService = chatMessageService;
         this.securityService = securityService;
@@ -65,68 +71,81 @@ public class PrivateChatView extends HorizontalLayout {
 
         // User List Section
         setupUserGrid();
-        userListLayout.add(userGrid);
-        userListLayout.addClassName("user-list");
+        userListAsideLayout.add(userGrid);
+        userListAsideLayout.addClassNames(Display.FLEX, FlexDirection.COLUMN, Flex.GROW_NONE, Flex.SHRINK_NONE,
+                Background.CONTRAST_5);
+        userListAsideLayout.setWidth("20rem");
+        userListAsideLayout.addClassName("private-user-list");
 
         // Chat Section
         VerticalLayout chatContent = new VerticalLayout();
-        chatContent.addClassName("chat-content");
+        chatContent.addClassName("private-chat-content");
         chatContent.setSizeFull();
         chatContent.setSpacing(true);
         chatContent.setPadding(true);
-
-        chatContainer.addClassName("chat-container");
+        chatContainer.addClassName("private-chat-container");
         chatContainer.setHeight("100%");
-        chatContainer.setVisible(false);
+        chatContainer.setWidth("100%");
 
         // Setup chat header
         setupChatHeader();
 
         // Setup message container
-        messageContainer.addClassName("chat-content");
+        messageContainer.addClassName("private-chat-content");
         messageContainer.getStyle().set("flex-grow", "1");
         messageContainer.getStyle().set("overflow-y", "auto");
         messageContainer.setPadding(true);
 
         // Setup input area
+        HorizontalLayout inputLayout = new HorizontalLayout();
+        inputLayout.setWidthFull();
+        inputLayout.setSpacing(true);
+        inputLayout.setAlignItems(Alignment.CENTER);
+        inputLayout.addClassName("private-input-layout");
+
         messageField.setPlaceholder("Type a message...");
-        messageField.addClassName("message-input");
+        messageField.addClassName("private-message-input");
         messageField.addKeyPressListener(Key.ENTER, event -> sendMessage(messageField.getValue()));
-        sendButton.addClassName("send-button");
+        sendButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        sendButton.addClickShortcut(Key.ENTER);
+        sendButton.addClassName("private-send-button");
         sendButton.addClickListener(event -> sendMessage(messageField.getValue()));
 
-        HorizontalLayout inputArea = new HorizontalLayout(messageField, sendButton);
-        inputArea.addClassName("input-area");
+        inputArea.add(messageField, sendButton);
+        inputArea.addClassName("private-input-area");
         inputArea.setWidth("100%");
 
-        chatContainer.add(chatHeader, messageContainer, inputArea);
-
-        add(userListLayout, chatContainer);
+        add(chatContainer, userListAsideLayout);
     }
 
     private void setupUserGrid() {
         userGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
         userGrid.removeAllColumns();
+        userGrid.addClassName("private-user-grid");
+        HorizontalLayout usersListsHeader=new HorizontalLayout();
+        usersListsHeader.add(new Icon(VaadinIcon.USERS));
+        usersListsHeader.add("Users List");
+        usersListsHeader.addClassName("shadow-usersListsHeader");
         userGrid.addComponentColumn(user -> {
             HorizontalLayout userLayout = new HorizontalLayout();
+            userLayout.addClassName("user-item"); // Added class
             Avatar avatar = new Avatar(user.getUsername());
+            avatar.addClassName("user-avatar"); // Added class
             Span username = new Span(user.getUsername());
+            username.addClassName("user-name"); // Added class
 
             // Add notification badge if there are unread messages
             if (unreadCounts.containsKey(user.getUsername()) && unreadCounts.get(user.getUsername()) > 0) {
                 Span badge = new Span(String.valueOf(unreadCounts.get(user.getUsername())));
-                badge.getStyle().set("background-color", "var(--lumo-error-color)")
-                    .set("color", "white")
-                    .set("border-radius", "50%")
-                    .set("padding", "2px 6px")
-                    .set("font-size", "0.8em");
+                badge.addClassName("unread-badge"); // Replaced inline styles with class
                 userLayout.add(avatar, username, badge);
             } else {
                 userLayout.add(avatar, username);
             }
             return userLayout;
-        }).setHeader("Users");
-
+        }).setHeader(usersListsHeader).addClassName("user-grid-header"); // Added class to header
+        
+        
         userGrid.addItemClickListener(event -> {
             String recipientUsername = event.getItem().getUsername();
             openChatWithUser(recipientUsername);
@@ -150,7 +169,7 @@ public class PrivateChatView extends HorizontalLayout {
     }
 
     private void setupChatHeader() {
-        chatHeader.addClassName("chat-header");
+        chatHeader.addClassName("private-chat-header");
         chatHeader.setWidth("100%");
         chatHeader.setPadding(true);
         chatHeader.setSpacing(true);
@@ -163,11 +182,12 @@ public class PrivateChatView extends HorizontalLayout {
     private void openChatWithUser(String recipientUsername) {
         if (recipientUsername != null) {
             currentRecipient = recipientUsername;
-            chatContainer.setVisible(true);
+            chatContainer.add(chatHeader, messageContainer, inputArea);
             updateChatHeader(recipientUsername);
 
             // Load chat history
-            List<ChatMessageService.ChatMessage> history = chatMessageService.getChatHistory(getUsername(), recipientUsername);
+            List<ChatMessageService.ChatMessage> history = chatMessageService.getChatHistory(getUsername(),
+                    recipientUsername);
             userMessages.put(recipientUsername, new ArrayList<>(history));
             displayMessages();
         }
@@ -176,10 +196,9 @@ public class PrivateChatView extends HorizontalLayout {
     private void sendMessage(String text) {
         if (!text.trim().isEmpty() && currentRecipient != null) {
             chatMessageService.sendMessage(
-                getUsername(),
-                currentRecipient,
-                text
-            );
+                    getUsername(),
+                    currentRecipient,
+                    text);
             messageField.clear();
         }
     }
@@ -197,7 +216,7 @@ public class PrivateChatView extends HorizontalLayout {
                 VerticalLayout messageWrapper = new VerticalLayout();
                 messageWrapper.setSpacing(false);
                 messageWrapper.setPadding(false);
-                messageWrapper.addClassName("message-bubble");
+                messageWrapper.addClassName("private-message-bubble");
 
                 Div bubble = createMessageBubble(message.getContent(), isUser, message.getTimestamp());
                 messageWrapper.add(bubble);
@@ -207,10 +226,10 @@ public class PrivateChatView extends HorizontalLayout {
                     // Add message status for user messages
                     Span status = new Span();
                     status.getStyle()
-                        .set("font-size", "0.8em")
-                        .set("color", "var(--lumo-secondary-text-color)")
-                        .set("margin-left", "4px");
-
+                            .set("font-size", "0.8em")
+                            .set("color", "var(--lumo-secondary-text-color)")
+                            .set("margin-left", "4px");
+                    status.addClassName("message-read-status");
                     Icon statusIcon = switch (message.getStatus()) {
                         case SENT -> VaadinIcon.CHECK.create();
                         case DELIVERED -> VaadinIcon.CHECK_CIRCLE.create();
@@ -247,17 +266,18 @@ public class PrivateChatView extends HorizontalLayout {
                     if (!message.getFrom().equals(username)) {
                         unreadCounts.put(otherUser, unreadCounts.getOrDefault(otherUser, 0) + 1);
                     }
-                    
+
                     // Show notification to receiver when they're not viewing the chat
                     if (currentRecipient == null || !currentRecipient.equals(message.getFrom())) {
                         if (message.getTo().equals(getUsername())) {
-                            Notification.show("New message from " + message.getFrom(), 3000, Notification.Position.TOP_CENTER);
+                            Notification.show("New message from " + message.getFrom(), 3000,
+                                    Notification.Position.TOP_CENTER);
                         }
                     }
 
                     // Update UI if this is the current chat
                     if (currentRecipient != null &&
-                        (currentRecipient.equals(message.getFrom()) || currentRecipient.equals(message.getTo()))) {
+                            (currentRecipient.equals(message.getFrom()) || currentRecipient.equals(message.getTo()))) {
                         displayMessages();
                     }
                 }));
@@ -271,41 +291,28 @@ public class PrivateChatView extends HorizontalLayout {
 
     private Div createMessageBubble(String message, boolean isUser, java.time.LocalDateTime timestamp) {
         Div bubble = new Div();
-        bubble.addClassName(isUser ? "user-message" : "receiver-message");
-        
+        bubble.addClassName(isUser ? "private-user-message" : "private-receiver-message");
+
         // Create message content
         Div messageContent = new Div();
         messageContent.setText(message);
-        messageContent.getStyle()
-            .set("word-break", "break-word")
-            .set("white-space", "pre-wrap")
-            .set("padding", "8px 12px");
+        messageContent.addClassName("private-inner-message-content");
 
         // Add timestamp below message
         String formattedTime = timestamp.format(java.time.format.DateTimeFormatter.ofPattern("HH:mm"));
         Span timeSpan = new Span(formattedTime);
-        timeSpan.getStyle()
-            .set("font-size", "0.7em")
-            .set("color", isUser ? "rgba(255,255,255,0.7)" : "var(--lumo-secondary-text-color)")
-            .set("margin-top", "2px")
-            .set("display", "block")
-            .set("text-align", isUser ? "right" : "left");
+        timeSpan.addClassName("message-timestamp");
 
         // Add message status for user messages
-        if (isUser) {
-            Icon statusIcon = new Icon(VaadinIcon.CHECK);
-            statusIcon.getStyle()
-                .set("font-size", "0.7em")
-                .set("color", "rgba(255,255,255,0.7)")
-                .set("margin-left", "4px");
-            timeSpan.add(statusIcon);
-        }
+        // if (isUser) {
+        // Icon statusIcon = new Icon(VaadinIcon.CHECK);
+        // statusIcon.addClassName("message-status-icon");
+        // timeSpan.add(statusIcon);
+        // }
 
         VerticalLayout messageLayout = new VerticalLayout(messageContent, timeSpan);
-        messageLayout.setSpacing(false);
-        messageLayout.setPadding(false);
-        messageLayout.getStyle().set("width", "100%");
-        
+        messageLayout.addClassName("message-layout");
+
         bubble.add(messageLayout);
         return bubble;
     }
