@@ -32,6 +32,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 @PermitAll
 @Route(value = "upload", layout = MainLayout.class)
 @PageTitle("File Upload | Chat App")
@@ -134,12 +137,14 @@ public class FileUploadView extends VerticalLayout {
 
         // Configure grid
         fileGrid.addColumn(fileName -> fileName)
-            .setHeader("File Name")
-            .setFlexGrow(1)
-            .setAutoWidth(true);
+                .setHeader("File Name")
+                .setFlexGrow(1)
+                .setAutoWidth(true);
 
         fileGrid.addComponentColumn(fileName -> {
             HorizontalLayout actions = new HorizontalLayout();
+            String currentUser = getCurrentUsername();
+            String owner = fileService.getOwner(fileName);
             actions.setSpacing(true);
             actions.setJustifyContentMode(JustifyContentMode.END);
             actions.setWidthFull();
@@ -158,27 +163,31 @@ public class FileUploadView extends VerticalLayout {
             downloadLink.add(downloadButton);
 
             // Delete button
-            Button deleteButton = new Button(new Icon(VaadinIcon.TRASH));
-            deleteButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY, ButtonVariant.LUMO_ERROR);
-            deleteButton.addClassName("action-button");
-            deleteButton.getElement().setAttribute("aria-label", "Delete file");
-            deleteButton.getElement().setAttribute("title", "Delete file");
-
-            deleteButton.addClickListener(e -> {
-                boolean deleted = fileService.deleteFile(fileName);
-                if (deleted) {
-                    Notification.show("File deleted successfully",
-                            3000, Notification.Position.TOP_END)
-                            .addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-                    refreshFileList();
-                } else {
-                    Notification.show("Failed to delete file",
-                            3000, Notification.Position.TOP_END)
-                            .addThemeVariants(NotificationVariant.LUMO_ERROR);
+           
+                Button deleteButton = new Button(new Icon(VaadinIcon.TRASH));
+                deleteButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY, ButtonVariant.LUMO_ERROR);
+                deleteButton.addClassName("action-button");
+                deleteButton.getElement().setAttribute("aria-label", "Delete file");
+                deleteButton.getElement().setAttribute("title", "Delete file");
+            
+                deleteButton.addClickListener(e -> {
+                    boolean deleted = fileService.deleteFile(fileName);
+                    if (deleted) {
+                        Notification.show("File deleted successfully",
+                                3000, Notification.Position.TOP_END)
+                                .addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+                        refreshFileList();
+                    } else {
+                        Notification.show("Failed to delete file",
+                                3000, Notification.Position.TOP_END)
+                                .addThemeVariants(NotificationVariant.LUMO_ERROR);
+                    }
+                });
+                actions.add(downloadLink);
+                if (currentUser.equals(owner)) {
+                    actions.add(deleteButton);
                 }
-            });
-
-            actions.add(downloadLink, deleteButton);
+            
             return actions;
         }).setHeader("Actions").setTextAlign(ColumnTextAlign.END).setWidth("160px").setFlexGrow(0);
 
@@ -223,8 +232,9 @@ public class FileUploadView extends VerticalLayout {
         upload.addSucceededListener(event -> {
             String fileName = event.getFileName();
             try {
-                fileService.saveFile(fileName, memoryBuffer.getInputStream());
-                Notification.show("File uploaded successfully", 
+                String username = getCurrentUsername();
+                fileService.saveFile(fileName, memoryBuffer.getInputStream(), username);
+                Notification.show("File uploaded successfully",
                         3000, Notification.Position.TOP_END)
                         .addThemeVariants(NotificationVariant.LUMO_SUCCESS);
                 refreshFileList();
@@ -246,9 +256,10 @@ public class FileUploadView extends VerticalLayout {
     }
 
     private void refreshFileList() {
-        List<String> files = fileService.getAllFiles();
+        String username = getCurrentUsername();
+        List<String> files = fileService.getFilesByUser(username);
         fileGrid.setItems(files);
-        emptyText.setVisible(files.isEmpty()); // Show or hide the empty message
+        emptyText.setVisible(files.isEmpty());
     }
 
     private Anchor createDownloadLink(String fileName) {
@@ -267,5 +278,10 @@ public class FileUploadView extends VerticalLayout {
         downloadLink.addClassName("download-link");
 
         return downloadLink;
+    }
+
+    private String getCurrentUsername() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();
     }
 }

@@ -14,12 +14,13 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class FileService {
 
     private static final String UPLOAD_FOLDER = "uploads";
-    
+    private final ConcurrentHashMap<String, String> fileOwnerMap = new ConcurrentHashMap<>();
     public FileService() {
         final Logger logger = LoggerFactory.getLogger(FileService.class);
 
@@ -70,10 +71,11 @@ public class FileService {
      * @return The path where the file was saved
      * @throws IOException If there's an error saving the file
      */
-    public Path saveFile(String originalFileName, InputStream inputStream) throws IOException {
+    public Path saveFile(String originalFileName, InputStream inputStream, String username) throws IOException {
         String uniqueFileName = generateUniqueFileName(originalFileName);
         Path targetPath = Paths.get(UPLOAD_FOLDER, uniqueFileName);
         Files.copy(inputStream, targetPath, StandardCopyOption.REPLACE_EXISTING);
+        fileOwnerMap.put(uniqueFileName, username);
         return targetPath;
     }
     
@@ -97,11 +99,12 @@ public class FileService {
      * 
      * @return List of file names
      */
-    public List<String> getAllFiles() {
+    public List<String> getFilesByUser(String username) {
         try {
             return Files.list(Paths.get(UPLOAD_FOLDER))
                     .filter(Files::isRegularFile)
                     .map(path -> path.getFileName().toString())
+                    // .filter(fileName -> username.equals(fileOwnerMap.get(fileName)))
                     .collect(Collectors.toList());
         } catch (IOException e) {
             return new ArrayList<>();
@@ -127,5 +130,9 @@ public class FileService {
      */
     public Path getFilePath(String fileName) {
         return Paths.get(UPLOAD_FOLDER, fileName);
+    }
+
+    public String getOwner(String fileName) {
+        return fileOwnerMap.get(fileName);
     }
 }
