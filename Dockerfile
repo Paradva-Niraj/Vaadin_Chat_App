@@ -49,9 +49,6 @@ COPY tsconfig.json .
 COPY vite.config.ts .
 COPY types.d.ts .
 
-# Ensure the CSS file is in both possible locations Vaadin might look for it
-RUN mkdir -p src/main/frontend/themes/chatappgroupproject/
-RUN cp frontend/themes/chatappgroupproject/private-chat.css src/main/frontend/themes/chatappgroupproject/ || true
 
 # Build with production profile
 RUN ./mvnw clean package -Pproduction -DskipTests
