@@ -1,6 +1,6 @@
 # Vaadin Chat Application
 
-### 🚀Live Link : [https://vaadin-chat-app.onrender.com/login](https://vaadin-chat-app.onrender.com/login)
+### 🚀Live Link : [https://vaadin-chat-app-i7z3.onrender.com](https://vaadin-chat-app-i7z3.onrender.com)
 
 ## Overview
 This is a modern, feature-rich chat application built with Vaadin, offering seamless group and personal chats, file sharing, and AI-powered conversations using Google's Gemini model. It features a sleek, user-friendly design, secure JWT-based authentication, and real-time functionality powered by Supabase as the backend.
