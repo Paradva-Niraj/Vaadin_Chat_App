@@ -18,11 +18,11 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import java.util.Map;
-
+import com.vaadin.flow.component.dependency.CssImport;
 @Route("signup")
 @PageTitle("Sign Up")
 @AnonymousAllowed
-@StyleSheet("themes/chatappgroupproject/signup-layout.css")
+@CssImport("themes/chatappgroupproject/signup-layout.css")
 public class SignUpView extends VerticalLayout {
 
     private final AuthenticationService authenticationService;
