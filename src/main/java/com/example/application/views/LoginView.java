@@ -22,11 +22,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
-
+import com.vaadin.flow.component.dependency.CssImport;
 @Route("login")
 @PageTitle("Login")
 @AnonymousAllowed
-@StyleSheet("themes/chatappgroupproject/login-layout.css")
+@CssImport("themes/chatappgroupproject/login-layout.css")
 
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
 
