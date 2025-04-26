@@ -36,7 +36,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route(value = "private-chat/:username?", layout = MainLayout.class)
 @PageTitle("Private Chat")
 @AnonymousAllowed
-@CssImport("./themes/chatappgroupproject/private-chat.css")
+@CssImport("themes/chatappgroupproject/views/private-chat-view.css")
 public class PrivateChatView extends HorizontalLayout {
     private final Aside userListAsideLayout = new Aside();
     private final VerticalLayout chatContainer = new VerticalLayout();
